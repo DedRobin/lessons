@@ -69,8 +69,7 @@ In [28]: side_of_square = 13
 In [29]: perimeter_square_diagonale
 Out[29]: [40, 20, 14.142135623730951]
 
-In [30]: perimeter_square_diagonale = [side_of_square * 4, side_of_square
-    ...: ** 2, (2 * side_of_square**2)**0.5]
+In [30]: perimeter_square_diagonale = [side_of_square * 4, side_of_square ** 2, (2 * side_of_square**2)**0.5]
 
 In [31]: perimeter_square_diagonale
 Out[31]: [52, 169, 18.384776310850235]
