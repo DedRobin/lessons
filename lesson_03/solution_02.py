@@ -1,15 +1,14 @@
-contribution = 2130
-
+# Variables
+first_contribution = 2130
 bonus = 120
-
 percent = 0.1
-
 years = 5
 
-answer = contribution
+current_contribution = first_contribution
 
-for year in range(1, years):
-	answer += contribution * percent + bonus
+# Find the current contribution for each year
+for year in range(years):
+    general_bonus = current_contribution * percent + bonus
+    current_contribution += general_bonus
 
-print(answer)
-
+print(current_contribution)
