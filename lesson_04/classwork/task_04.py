@@ -7,5 +7,6 @@ import random
 
 random_number = 0
 while random_number != 7:
-    random_number = random.randint(1, 10)
+
     print(random_number)
+    random_number = random.randint(1, 10)
