@@ -8,7 +8,6 @@ end = int(input("Enter a end number: "))
 
 result = 0
 for item in range(start, end + 1):
-    print(result, item)
     result += item ** 2
 
 print(result)
