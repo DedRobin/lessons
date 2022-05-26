@@ -18,13 +18,13 @@ for current_number in range(start, end + 1):
     elif current_number == 2:
         prime_numbers.append(current_number)
         continue
-
-    # Run loop which break it if number is divisible.
-    for x in range(2, current_number // 2):
-        if current_number % x == 0:
-            break
-    # If loop din't find it then display "current_number".
     else:
-        prime_numbers.append(current_number)
+        # Run loop which break it if number is divisible.
+        for x in range(2, current_number // 2 + 1):
+            if current_number % x == 0:
+                break
+        # If loop din't find it then display "current_number".
+        else:
+            prime_numbers.append(current_number)
 
 print("Prime numbers:", *prime_numbers, "\nCounter of prime numbers: ", len(prime_numbers))
