@@ -12,9 +12,9 @@ def xor_cipher(string, key):
 def xor_uncipher(string, key):
     return "".join([chr(ord(letter) ^ key) for letter in string])
 
+if __name__=="__main__":
+    cipher_word = xor_cipher("hello", 12)
+    print(cipher_word)
 
-cipher_word = xor_cipher("hello", 12)
-print(cipher_word)
-
-uncipher_word = xor_uncipher(cipher_word, 12)
-print(xor_uncipher(xor_cipher("hello", 12), 12))
+    uncipher_word = xor_uncipher(cipher_word, 12)
+    print(xor_uncipher(xor_cipher("hello", 12), 12))
