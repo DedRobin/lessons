@@ -4,7 +4,7 @@
 Написать также функцию xor_uncipher, которая по зашифрованной строке и ключу восстанавливает исходную строку.
 """
 
-
+# use word as key!!!
 def xor_cipher(string, key):
     return "".join([chr(ord(letter) ^ key) for letter in string])
 
