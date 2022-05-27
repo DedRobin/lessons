@@ -5,7 +5,9 @@
 
 string = input(("Enter string to check if it is palindrome: "))
 
-if string == string[::-1]:
-    print("Yes")
-else:
-    print("No")
+# if string == string[::-1]:
+#     print("Yes")
+# else:
+#     print("No")
+
+print("yes" if string == string[::-1] else "no")
