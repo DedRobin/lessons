@@ -6,7 +6,7 @@
 from math import ceil
 
 
-def xor_cipher(string: str, cipher_key: str):
+def xor_cipher(string: str, cipher_key: str) -> str:
     """
     Входящие данные:
 
@@ -39,8 +39,8 @@ def xor_cipher(string: str, cipher_key: str):
     return new_cipher_word
 
 
-def xor_uncipher(uncipher_word, key):
-    return xor_cipher(uncipher_word, key)
+def xor_uncipher(uncipher_word: str, uncipher_key: str) -> str:
+    return xor_cipher(uncipher_word, uncipher_key)
 
 
 if __name__ == "__main__":
