@@ -14,10 +14,4 @@ def three_args(**kwargs):
     return f"Переданы аргументы: {result}."
 
 
-some_dict = {'var1': 10,
-             'var2': 43,
-             'var3': 'forty six',
-             'var4': 12,
-             'var5': None,
-             'var6': 'twenty'}
-print(three_args(**some_dict))
+print(three_args(var1=10, var2=43, var3='forty six', var4=12, var6='twenty'))
