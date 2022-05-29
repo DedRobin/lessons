@@ -3,36 +3,57 @@
 которая возвращает строку, зашифрованную путем применения функции XOR (^) над символами строки с ключом.
 Написать также функцию xor_uncipher, которая по зашифрованной строке и ключу восстанавливает исходную строку.
 """
-import math
+from math import ceil
 
 
-def xor_cipher(string: str, key: str):
-    string = list(string)
-    if len(string) < len(key):
-        key = key[:len(string)]
-    elif len(string) > len(key):
-        k = math.ceil((len(string) / len(key)))  # округление в большую сторону
-        key = key * k
-    key = list(key)
-    cipher_word = ""
+def xor_cipher(string: str, cipher_key: str):
+    """
+    Входящие данные:
+
+        string - фраза, которую нужно зашифровать
+        cipher_key - ключ шифрования
+
+    Результат:
+
+        new_cipher_key - зашифрованная фраза
+    """
+
+    new_cipher_word = ""  # Здесь будет наш результат
+
+    # Случай, когда длина (string) больше длины (cipher_key):
+    # Если len(string) > len(cipher_key), то фраза не зашифруется полностью.
+    # В этом случае нужно увеличить длину ключа шифрования путем конкатенации ее самой c собой (с помощью оператора '*')
+
+    if len(string) > len(cipher_key):
+        multiplier = ceil((len(string) / len(cipher_key)))  # округление в большую сторону
+        cipher_key = cipher_key * multiplier
+
+    # На каждой итерации цикла 'for' мы будем извлекать первый символ ключа, поэтому приведлем ее к списку.
+    cipher_key = list(cipher_key)
+
+    # Здесь соотносим символы друг с другом (1-й символ string с 1-м символом key, и т.д.)
     for letter in string:
-        print(letter, end=" ")
-        new_letter = chr(ord(letter) ^ ord(key.pop(0)))
-        print(new_letter)
-        cipher_word += new_letter
-    return cipher_word
+        new_letter = chr(ord(letter) ^ ord(cipher_key.pop(0)))
+        new_cipher_word += new_letter  # каждый символ добавляем в new_cipher_word
 
-    # return "".join([chr(ord(letter) ^ ord(key.pop())) for letter in repr(string)])
-
-
-def xor_uncipher(string, key):
-    return "".join([chr(ord(letter) ^ key) for letter in string])
+    return new_cipher_word
 
 
 if __name__ == "__main__":
-    cipher_word = xor_cipher("hello", "kgghjk")
-    print(repr(cipher_word))
-    cipher_word = xor_cipher(cipher_word, "kgghjk")
+    # Test: string < key
+
+    word = "Hello, world!"
+    key = "kd 672h"
+    cipher_word = xor_cipher(word, key)
     print(cipher_word)
-    # uncipher_word = xor_uncipher(cipher_word, 12)
-    # print(xor_uncipher(xor_cipher("hello", 12), 12))
+    cipher_word = xor_cipher(cipher_word, key)
+    print(cipher_word)
+
+    # Test  string < key
+
+    word = "point"
+    key = "j6!a"
+    cipher_word = xor_cipher(word, key)
+    print(cipher_word)
+    cipher_word = xor_cipher(cipher_word, key)
+    print(cipher_word)
