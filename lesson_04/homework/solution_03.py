@@ -39,6 +39,10 @@ def xor_cipher(string: str, cipher_key: str):
     return new_cipher_word
 
 
+def xor_uncipher(uncipher_word, key):
+    return xor_cipher(uncipher_word, key)
+
+
 if __name__ == "__main__":
     # Test: string < key
 
@@ -46,7 +50,7 @@ if __name__ == "__main__":
     key = "kd 672h"
     cipher_word = xor_cipher(word, key)
     print(cipher_word)
-    cipher_word = xor_cipher(cipher_word, key)
+    cipher_word = xor_uncipher(cipher_word, key)
     print(cipher_word)
 
     # Test  string < key
@@ -55,5 +59,5 @@ if __name__ == "__main__":
     key = "j6!a"
     cipher_word = xor_cipher(word, key)
     print(cipher_word)
-    cipher_word = xor_cipher(cipher_word, key)
+    cipher_word = xor_uncipher(cipher_word, key)
     print(cipher_word)
