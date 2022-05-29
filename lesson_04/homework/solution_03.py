@@ -7,15 +7,22 @@ import math
 
 
 def xor_cipher(string: str, key: str):
+    string = list(string)
     if len(string) < len(key):
         key = key[:len(string)]
     elif len(string) > len(key):
-        k = math.ceil((len(string) / len(key)))
+        k = math.ceil((len(string) / len(key)))  # округление в большую сторону
         key = key * k
-    else:
-        pass
     key = list(key)
-    return "".join([chr(ord(letter) ^ ord(key.pop())) for letter in string])
+    cipher_word = ""
+    for letter in string:
+        print(letter, end=" ")
+        new_letter = chr(ord(letter) ^ ord(key.pop(0)))
+        print(new_letter)
+        cipher_word += new_letter
+    return cipher_word
+
+    # return "".join([chr(ord(letter) ^ ord(key.pop())) for letter in repr(string)])
 
 
 def xor_uncipher(string, key):
@@ -23,9 +30,9 @@ def xor_uncipher(string, key):
 
 
 if __name__ == "__main__":
-    cipher_word = xor_cipher("hello", "al")
-    print(cipher_word)
-    cipher_word = xor_cipher(cipher_word, "key")
+    cipher_word = xor_cipher("hello", "kgghjk")
+    print(repr(cipher_word))
+    cipher_word = xor_cipher(cipher_word, "kgghjk")
     print(cipher_word)
     # uncipher_word = xor_uncipher(cipher_word, 12)
     # print(xor_uncipher(xor_cipher("hello", 12), 12))
