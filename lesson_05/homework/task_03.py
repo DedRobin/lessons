@@ -12,8 +12,8 @@ def get_content(url, file_name):
     path = os.path.expanduser('~')  # путь к текущему пользователю
 
     # сохраняем файл на рабочий стол с расширением ".txt"
-    with open(f"{path}/Рабочий стол/{file_name}.txt", "wb") as file:
-        file.write(req.content)
+    with open(f"{path}/Рабочий стол/{file_name}.txt", "w") as file:
+        file.write(req.text)
 
 
 if __name__ == "__main__":
