@@ -3,7 +3,6 @@
 которая возвращает строку, зашифрованную путем применения функции XOR (^) над символами строки с ключом.
 Написать также функцию xor_uncipher, которая по зашифрованной строке и ключу восстанавливает исходную строку.
 """
-from math import ceil
 
 
 def xor_cipher(string: str, cipher_key: str) -> str:
@@ -25,7 +24,7 @@ def xor_cipher(string: str, cipher_key: str) -> str:
     # В этом случае нужно увеличить длину ключа шифрования путем конкатенации ее самой c собой (с помощью оператора '*')
 
     if len(string) > len(cipher_key):
-        multiplier = ceil((len(string) / len(cipher_key)))  # округление в большую сторону
+        multiplier = len(string) // len(cipher_key) + len(string) % len(cipher_key)  # округление в большую сторону
         cipher_key = cipher_key * multiplier
 
     # На каждой итерации цикла 'for' мы будем извлекать первый символ ключа, поэтому приведлем ее к списку.
