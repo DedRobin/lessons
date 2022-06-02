@@ -6,10 +6,18 @@
 
 def two_most_common_words(text):
     text = text.lower()
-    text = text.replace(".", " ")
-    my_list = [(text.count(word), word) for word in set(text.split())]
-    first_most_common, second_most_common2 = sorted(my_list, reverse=True)[0:2]
-    return first_most_common[1], second_most_common2[1]
 
-text = "You get money money to pay money for you to."
+    # Find all alphabet characters and space and apostrophe (')
+    text = "".join([character for character in text if character.isalpha() or character == " " or character == "'"])
+
+    # Find 2 most common words
+    my_list = [(text.count(" " + word + " "), word) for word in set(text.split())]
+    first_most_common, second_most_common2 = sorted(my_list, reverse=True)[0:2]
+
+    # Find longest word
+    longest_word = sorted(my_list, key=lambda x: len(x[1]), reverse=True)[0][1]
+    return f"Two most common word: {first_most_common[1]}, {second_most_common2[1]}.\nLongest word: {longest_word}."
+
+
+text = "You get money to pay money for not unnecessary things. So you don't need to spend a lot of money!"
 print(two_most_common_words(text))
