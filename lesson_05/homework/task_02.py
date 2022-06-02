@@ -19,4 +19,6 @@ def secret_santa(*list_of_participants):
     return pairs
 
 
-print(secret_santa("Oleg", "Piter", "Albert", "Kate", "Alexandr", "Karina", "Sergei", "Ludmila"))
+# для нечетных
+
+print(secret_santa("Oleg", "Piter", "Albert", "Kate", "Alexandr", "Karina", "Sergei", "Ludmila", "Kale"))

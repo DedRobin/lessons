@@ -3,6 +3,7 @@
 которая возвращает строку, зашифрованную путем применения функции XOR (^) над символами строки с ключом.
 Написать также функцию xor_uncipher, которая по зашифрованной строке и ключу восстанавливает исходную строку.
 """
+import base64
 
 
 def xor_cipher(string: str, cipher_key: str) -> str:
@@ -49,14 +50,24 @@ if __name__ == "__main__":
     key = "kd 672h"
     cipher_word = xor_cipher(word, key)
     print(cipher_word)
-    cipher_word = xor_uncipher(cipher_word, key)
-    print(cipher_word)
+    cipher_word = cipher_word.encode("ascii")
+    print("Encode ascii:", cipher_word)
+    for x in cipher_word:
+        print(x, end=" ")
+    print()
+    cipher_word = base64.b64encode(cipher_word)
+    print("Encode base64:", cipher_word)
+    # cipher_word = xor_uncipher(cipher_word, key)
+    # print(cipher_word)
 
-    # Test  string < key
+    # Test  string > key
 
-    word = "point"
-    key = "j6!a"
-    cipher_word = xor_cipher(word, key)
-    print(cipher_word)
-    cipher_word = xor_uncipher(cipher_word, key)
-    print(cipher_word)
+    # word = "point"
+    # key = "j6!amnib"
+    # cipher_word = xor_cipher(word, key)
+    # print(cipher_word)
+    # cipher_word = xor_uncipher(cipher_word, key)
+    # print(cipher_word)
+
+# use library "base64"
+# and encode(),decode()
