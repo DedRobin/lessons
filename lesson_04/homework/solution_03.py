@@ -6,17 +6,24 @@
 import base64
 
 
-def xor_cipher(string: str, cipher_key: str) -> str:
+def xor_cipher(string: str, cipher_key: str, in_out_base64=True) -> str:
     """
+    Функция может использоваться как для шифрования, так и для дешифрования.
+
     Входящие данные:
 
         string - фраза, которую нужно зашифровать
         cipher_key - ключ шифрования
-
+        in_out_base64 - True, если нужно зашифровать в base64
+                        False, если нужно дешифровать из base64
     Результат:
 
         new_cipher_key - зашифрованная фраза
     """
+    # Если in_out_base64 == False
+    if not in_out_base64:
+        string = base64.b64decode(string)
+        string = string.decode("ascii")
 
     new_cipher_word = ""  # Здесь будет наш результат
 
@@ -36,11 +43,15 @@ def xor_cipher(string: str, cipher_key: str) -> str:
         new_letter = chr(ord(letter) ^ ord(cipher_key.pop(0)))
         new_cipher_word += new_letter  # каждый символ добавляем в new_cipher_word
 
+    # Если in_out_base64 = True
+    if in_out_base64:
+        new_cipher_word = new_cipher_word.encode("ascii")
+        new_cipher_word = base64.b64encode(new_cipher_word)
     return new_cipher_word
 
 
-def xor_uncipher(uncipher_word: str, uncipher_key: str) -> str:
-    return xor_cipher(uncipher_word, uncipher_key)
+# def xor_uncipher(uncipher_word: str, uncipher_key: str) -> str:
+#     return xor_cipher(uncipher_word, uncipher_key, in_out_base64=False)
 
 
 if __name__ == "__main__":
@@ -48,26 +59,19 @@ if __name__ == "__main__":
 
     word = "Hello, world!"
     key = "kd 672h"
-    cipher_word = xor_cipher(word, key)
+    cipher_word = xor_cipher(word, key, in_out_base64=True)
     print(cipher_word)
-    cipher_word = cipher_word.encode("ascii")
-    print("Encode ascii:", cipher_word)
-    for x in cipher_word:
-        print(x, end=" ")
-    print()
-    cipher_word = base64.b64encode(cipher_word)
-    print("Encode base64:", cipher_word)
-    # cipher_word = xor_uncipher(cipher_word, key)
-    # print(cipher_word)
+    cipher_word = xor_cipher(cipher_word, key, in_out_base64=False)
+    print(cipher_word)
 
     # Test  string > key
 
-    # word = "point"
-    # key = "j6!amnib"
-    # cipher_word = xor_cipher(word, key)
-    # print(cipher_word)
-    # cipher_word = xor_uncipher(cipher_word, key)
-    # print(cipher_word)
+    word = "point"
+    key = "j6!amnib"
+    cipher_word = xor_cipher(word, key, in_out_base64=True)
+    print(cipher_word)
+    cipher_word = xor_cipher(cipher_word, key, in_out_base64=False)
+    print(cipher_word)
 
 # use library "base64"
 # and encode(),decode()
