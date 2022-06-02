@@ -16,6 +16,7 @@ def two_most_common_words(text):
 
     # Find longest word
     longest_word = sorted(my_list, key=lambda x: len(x[1]), reverse=True)[0][1]
+
     return f"Two most common word: {first_most_common[1]}, {second_most_common2[1]}.\nLongest word: {longest_word}."
 
 
