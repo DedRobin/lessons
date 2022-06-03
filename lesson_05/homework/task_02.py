@@ -7,18 +7,24 @@
 import random
 
 
-def secret_santa(*list_of_participants):
-    list_of_participants = list(list_of_participants)
+def secret_santa(*participants):
+    participants = list(participants)
+    participants_copy = participants.copy()
+    random.shuffle(participants)
+    random.shuffle(participants_copy)
     pairs = {}
-    while list_of_participants:
-        current_participant = random.choice(list_of_participants)
-        list_of_participants.remove(current_participant)
-        partner = random.choice(list_of_participants)
-        list_of_participants.remove(partner)
-        pairs[current_participant] = partner
+    while participants_copy and participants_copy:
+        first_person = random.choice(participants)
+        second_person = random.choice(participants_copy)
+        if first_person == second_person:
+            continue
+        pairs[first_person] = second_person
+        participants.remove(first_person)
+        participants_copy.remove(second_person)
     return pairs
 
 
-# для нечетных
-
-print(secret_santa("Oleg", "Piter", "Albert", "Kate", "Alexandr", "Karina", "Sergei", "Ludmila", "Kale"))
+if __name__ == '__main__':
+    my_dict = secret_santa("Oleg", "Piter", "Albert", "Kate", "Alexandr", "Karina", "Sergei", "Ludmila", "Pavel")
+    for first, second in my_dict.items():
+        print(f"{first} present {second}")
