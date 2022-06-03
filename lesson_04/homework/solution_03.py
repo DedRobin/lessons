@@ -22,6 +22,7 @@ def xor_cipher(string: str, cipher_key: str, in_out_base64=True) -> str:
     """
     # Если in_out_base64 == False
     if not in_out_base64:
+        string = string.encode("ascii")
         string = base64.b64decode(string)
         string = string.decode("ascii")
 
@@ -47,6 +48,7 @@ def xor_cipher(string: str, cipher_key: str, in_out_base64=True) -> str:
     if in_out_base64:
         new_cipher_word = new_cipher_word.encode("ascii")
         new_cipher_word = base64.b64encode(new_cipher_word)
+        new_cipher_word = new_cipher_word.decode("ascii")
     return new_cipher_word
 
 
