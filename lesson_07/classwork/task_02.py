@@ -13,7 +13,7 @@ def decorator(function):
         function()
         end_time = datetime.now()
         common_time = end_time - start_time
-        print(f"Execution time of function '{display_time.__name__}()' = {common_time}.")
+        print(f"Function execution time '{display_time.__name__}()' = {common_time}.")
 
     return display_time
 
