@@ -16,8 +16,7 @@ def find_all_coordinates_for_horse(x, y):
             filter(lambda current_tuple: 1 <= current_tuple[0] <= 8 and 1 <= current_tuple[1] <= 8, all_coordinates))
         return all_coordinates
     else:
-        print("You must enter a number from 1 to 8.")
-        return []
+        raise Exception("You must enter a number from 1 to 8.")
 
 
 def is_figure_beat_each_other(x1, y1, x2, y2):
@@ -32,18 +31,18 @@ def is_figure_beat_each_other(x1, y1, x2, y2):
 
 
 def main():
-    # x1, y1, x2, y2 = 1, 1, 3, 1
-    # print(is_figure_beat_each_other(x1, y1, x2, y2))
-    # x1, y1, x2, y2 = 1, 3, 5, 8
-    # print(is_figure_beat_each_other(x1, y1, x2, y2))
-    # x1, y1, x2, y2 = 1, 1, 8, 0
-    # print(is_figure_beat_each_other(x1, y1, x2, y2))
-    # x1, y1, x2, y2 = 6, 7, 7, 7
-    # print(is_figure_beat_each_other(x1, y1, x2, y2))
-    # x1, y1, x2, y2 = 3, 1, 1, 1
-    # print(is_figure_beat_each_other(x1, y1, x2, y2))
-    # x1, y1, x2, y2 = 3, 5, 3, 1
-    # print(is_figure_beat_each_other(x1, y1, x2, y2))
+    x1, y1, x2, y2 = 1, 1, 3, 1
+    print(is_figure_beat_each_other(x1, y1, x2, y2))
+    x1, y1, x2, y2 = 1, 3, 5, 8
+    print(is_figure_beat_each_other(x1, y1, x2, y2))
+    x1, y1, x2, y2 = 1, 1, 8, 0
+    print(is_figure_beat_each_other(x1, y1, x2, y2))
+    x1, y1, x2, y2 = 6, 7, 7, 7
+    print(is_figure_beat_each_other(x1, y1, x2, y2))
+    x1, y1, x2, y2 = 3, 1, 1, 1
+    print(is_figure_beat_each_other(x1, y1, x2, y2))
+    x1, y1, x2, y2 = 3, 5, 3, 1
+    print(is_figure_beat_each_other(x1, y1, x2, y2))
     x1, y1, x2, y2 = 1, 1, 2, 3
     print(is_figure_beat_each_other(x1, y1, x2, y2))
 
