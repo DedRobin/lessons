@@ -13,9 +13,10 @@ panels you have (between 1 and 1000000 inclusive) and returns a list of the area
 out of those panels, starting with the largest squares first. So, following the example above, solution(12)
 would return [9, 1, 1, 1].
 """
+from math import sqrt, floor
 
 
-def solution(area):
+def solution_1(area: int) -> list:
     squares = []
     while area > 0:
         max_square = int(area ** 0.5) ** 2
@@ -24,9 +25,19 @@ def solution(area):
     return squares
 
 
+def solution_2(area: int) -> list:
+    # basic case for exit from recursion
+    if area <= 0:
+        return []
+    else:
+        max_square = sqrt(area)
+        max_square = floor(max_square)
+        max_square = pow(max_square, 2)
+        return [max_square] + solution_2(area - max_square)
+
+
 if __name__ == '__main__':
-    print(solution(12))
-    print(solution(542))
-    print(solution(999998))
-    print(solution(1))
-    print(solution(13))
+    numbers = [12, 542, 99482, 126, 14234, 1283, 0, 19214, 47, 28, 18, 265, 3, 6, 197, -193]
+    for number in numbers:
+        print(solution_1(number))
+        print(solution_2(number))
