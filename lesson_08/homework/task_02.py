@@ -4,13 +4,17 @@
 """
 from task_01 import Car
 
+
+def accelerate_car(car_object: Car, speed: int) -> None:
+    for _ in range(speed // 5):
+        car_object.increase_speed()
+
+
 car = Car(brand="Mercedes", model="E500", year=2000)
-car.show_speed()
 
-# accelerate our car to 100 km/s
+if __name__ == '__main__':
+    car.show_speed()
 
-end_speed: int = 100
-for _ in range(end_speed // 5):
-    car.increase_speed()
+    accelerate_car(car, 100)  # accelerate our car to 100 km/s
 
-car.show_speed()
+    car.show_speed()
