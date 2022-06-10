@@ -31,7 +31,7 @@ class MyTimeTwo:
     def __le__(self, other):
         return self.to_seconds() <= other.to_seconds()
 
-    def __repr__(self):
+    def __str__(self):
         return f"{self.hours, self.minutes, self.seconds}"
 
 

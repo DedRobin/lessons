@@ -13,8 +13,8 @@ class MyTimeTwo(MyTimeTwo):
         hours = seconds // (60 * 60)
         seconds = seconds - hours * 3600
         minutes = seconds // 60
-        minutes_to_seconds = seconds * 60
-        seconds = seconds - hours_to_seconds - minutes_to_seconds
+        minutes_to_seconds = seconds - minutes * 60
+        seconds = seconds
         return MyTimeTwo(hours=hours, minutes=minutes, seconds=seconds)
 
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
