@@ -15,6 +15,6 @@ car = Car(brand="Mercedes", model="E500", year=2000)
 if __name__ == '__main__':
     car.show_speed()
 
-    accelerate_car(car, 100)  # accelerate our car to 100 km/s
+    accelerate_car(car_object=car, speed=100)  # accelerate our car to 100 km/s
 
     car.show_speed()
