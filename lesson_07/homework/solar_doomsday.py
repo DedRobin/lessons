@@ -19,7 +19,9 @@ from math import sqrt, floor
 def solution_1(area: int) -> list:
     squares = []
     while area > 0:
-        max_square = int(area ** 0.5) ** 2
+        max_square = sqrt(area)
+        max_square = floor(max_square)
+        max_square = pow(max_square, 2)
         squares.append(max_square)
         area = area - max_square
     return squares
