@@ -27,15 +27,12 @@ class Circle(Figure):
         self.radius = radius
 
     def find_area(self) -> float:
-        area = pow(pi * self.radius, 2)
+        area = pi * pow(self.radius, 2)
         return area
 
     def find_perimeter(self) -> float:
         perimeter = 2 * pi * self.radius
         return perimeter
-
-    def print_points(self) -> tuple[tuple[int, int], int]:
-        return (self.center.x, self.center.x), self.radius
 
 
 class Triangle(Figure):
@@ -60,11 +57,6 @@ class Triangle(Figure):
         perimeter = self.edge_ab + self.edge_bc + self.edge_ac
         return perimeter
 
-    def print_points(self) -> tuple[tuple[int, int], tuple[int, int], tuple[int, int]]:
-        return ((self.point_a.x, self.point_a.y),
-                (self.point_b.x, self.point_b.y),
-                (self.point_c.x, self.point_c.y))
-
 
 class Square(Figure):
     def __init__(self, point_a: Point = Point(0, 0),
@@ -81,20 +73,14 @@ class Square(Figure):
         perimeter = 4 * self.edge
         return perimeter
 
-    def print_points(self) -> tuple[tuple[int, int], tuple[int, int]]:
-        return ((self.point_a.x, self.point_a.y),
-                (self.point_b.x, self.point_b.y))
-
 
 if __name__ == '__main__':
     figures = [Circle(center=Point(1, 1), radius=10),
                Triangle(point_a=Point(2, 2), point_b=Point(4, 7), point_c=Point(1, 5)),
                Square(point_a=Point(4, 4), point_b=Point(4, 10)),
                Circle(center=Point(4, 2), radius=8)]
-    perimeters_and_areas = {}
+
     for number, figure in enumerate(figures, 1):
-        key = f"{figure}"
-        perimeters_and_areas[key] = {"perimeter": figure.find_perimeter(),
-                                     "area": figure.find_area()}
-    for current_figure, perimeter_and_area in perimeters_and_areas.items():
-        print(current_figure, perimeter_and_area)
+        print(f"{number}. {figure.__class__.__name__}:")
+        print(f"\tArea = {figure.find_area():.3f}")
+        print(f"\tPerimeter = {figure.find_perimeter():.3f}")
