@@ -9,40 +9,40 @@
 """
 import random
 
-kernels = {"1": [3, 2, 1],
+kernels = {"1": [4, 3, 2, 1],
            "2": [],
            "3": []}
 
-set_of_numbers = [1, 2, 3]
+set_of_numbers = [1, 2, 3, 4]
 
-while kernels["3"] != [3, 2, 1]:
+while kernels["3"] != [4, 3, 2, 1]:
     for disk in set_of_numbers:
         if disk in kernels["1"] and disk == kernels["1"][-1]:  # если диск находится в 1-м стержне сверху
-            if not kernels["2"]:
+            if not kernels["2"] and len(set_of_numbers) > 1:
                 kernels["2"].append(kernels["1"].pop())
-            elif not kernels["3"]:
+            elif not kernels["3"] and len(set_of_numbers) > 1:
                 kernels["3"].append(kernels["1"].pop())
-            elif kernels["2"][-1] == disk + 1:
+            elif kernels["2"] and kernels["2"][-1] == disk + 1:
                 kernels["2"].append(kernels["1"].pop())
-            elif kernels["3"][-1] == disk + 1:
+            elif kernels["3"] and kernels["3"][-1] == disk + 1:
                 kernels["3"].append(kernels["1"].pop())
         elif disk in kernels["2"] and disk == kernels["2"][-1]:  # если диск находится в 2-м стержне сверху
-            if not kernels["1"]:
+            if not kernels["1"] and len(set_of_numbers) > 1:
                 kernels["1"].append(kernels["2"].pop())
-            elif not kernels["3"]:
+            elif not kernels["3"] and len(set_of_numbers) > 1:
                 kernels["3"].append(kernels["2"].pop())
-            elif kernels["1"][-1] == disk + 1:
+            elif kernels["1"] and kernels["1"][-1] == disk + 1:
                 kernels["1"].append(kernels["2"].pop())
-            elif kernels["3"][-1] == disk + 1:
+            elif kernels["3"] and kernels["3"][-1] == disk + 1:
                 kernels["3"].append(kernels["2"].pop())
         elif disk in kernels["3"] and disk == kernels["3"][-1]:  # если диск находится в 3-м стержне сверху
-            if not kernels["1"]:
+            if not kernels["1"] and len(set_of_numbers) > 1:
                 kernels["1"].append(kernels["3"].pop())
-            elif not kernels["2"]:
+            elif not kernels["2"] and len(set_of_numbers) > 1:
                 kernels["2"].append(kernels["3"].pop())
-            elif kernels["1"][-1] == disk + 1:
+            elif kernels["1"] and kernels["1"][-1] == disk + 1:
                 kernels["1"].append(kernels["3"].pop())
-            elif kernels["2"][-1] == disk + 1:
+            elif kernels["2"] and kernels["2"][-1] == disk + 1:
                 kernels["2"].append(kernels["3"].pop())
     if max(set_of_numbers) in kernels["3"]:
         set_of_numbers.remove(max(set_of_numbers))
