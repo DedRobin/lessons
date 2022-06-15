@@ -18,7 +18,16 @@ class Point:
 
 
 class Figure:
-    pass
+    @staticmethod
+    def find_edge(point_a: Point, point_b: Point) -> float:
+        edge = sqrt(pow((point_a.x - point_b.x), 2) + pow((point_a.y - point_b.y), 2))
+        return edge
+
+    def find_area(self) -> float:
+        raise NotImplemented
+
+    def find_perimeter(self) -> float:
+        raise NotImplemented
 
 
 class Circle(Figure):
@@ -42,9 +51,9 @@ class Triangle(Figure):
         self.point_a = point_a
         self.point_b = point_b
         self.point_c = point_c
-        self.edge_ab = sqrt(pow((point_a.x - point_b.x), 2) + pow((point_a.y - point_b.y), 2))
-        self.edge_bc = sqrt(pow((point_b.x - point_c.x), 2) + pow((point_b.y - point_c.y), 2))
-        self.edge_ac = sqrt(pow((point_a.x - point_c.x), 2) + pow((point_a.y - point_c.y), 2))
+        self.edge_ab = Figure.find_edge(point_a, point_b)
+        self.edge_bc = Figure.find_edge(point_b, point_c)
+        self.edge_ac = Figure.find_edge(point_a, point_c)
 
     def find_area(self) -> float:
         half_perimeter = self.find_perimeter() // 2
@@ -63,7 +72,7 @@ class Square(Figure):
                  point_b: Point = Point(0, 0)) -> None:
         self.point_a = point_a
         self.point_b = point_b
-        self.edge = sqrt(pow((point_a.x - point_b.x), 2) + pow((point_a.y - point_b.y), 2))
+        self.edge = Figure.find_edge(point_a, point_b)
 
     def find_area(self) -> float:
         area = pow(self.edge, 2)
@@ -75,10 +84,14 @@ class Square(Figure):
 
 
 if __name__ == '__main__':
-    figures = [Circle(center=Point(1, 1), radius=10),
-               Triangle(point_a=Point(2, 2), point_b=Point(4, 7), point_c=Point(1, 5)),
-               Square(point_a=Point(4, 4), point_b=Point(4, 10)),
-               Circle(center=Point(4, 2), radius=8)]
+    circle_01 = Circle(center=Point(1, 1), radius=10)
+    circle_02 = Circle(center=Point(0, 5), radius=3)
+    triangle_01 = Triangle(point_a=Point(2, 2), point_b=Point(4, 7), point_c=Point(1, 5))
+    triangle_02 = Triangle(point_a=Point(3, 4), point_b=Point(2, 7), point_c=Point(1, 7))
+    square_01 = Square(point_a=Point(4, 4), point_b=Point(4, 10))
+    square_02 = Square(point_a=Point(3, 10), point_b=Point(0, 12))
+
+    figures = [circle_01, circle_02, triangle_01, triangle_02, square_01, square_02]
 
     for number, figure in enumerate(figures, 1):
         print(f"{number}. {figure.__class__.__name__}:")
