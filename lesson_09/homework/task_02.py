@@ -8,42 +8,41 @@
 перекладываний, необходимую для решения головоломки.
 """
 from copy import deepcopy
-tower = [4, 3, 2, 1]
-kernels = {"1": tower,
-           "2": [],
-           "3": []}
 
-tower_copy = deepcopy(tower)[::-1]
+number_of_disks = 3
 
-while kernels["3"] != tower_copy:
-    for disk in tower_copy:
-        if disk in kernels["1"] and disk == kernels["1"][-1]:  # если диск находится в 1-м стержне сверху
-            if not kernels["2"] and len(tower_copy) > 1:
-                kernels["2"].append(kernels["1"].pop())
-            elif not kernels["3"] and len(tower_copy) > 1:
-                kernels["3"].append(kernels["1"].pop())
-            elif kernels["2"] and kernels["2"][-1] == disk + 1:
-                kernels["2"].append(kernels["1"].pop())
-            elif kernels["3"] and kernels["3"][-1] == disk + 1:
-                kernels["3"].append(kernels["1"].pop())
-        elif disk in kernels["2"] and disk == kernels["2"][-1]:  # если диск находится в 2-м стержне сверху
-            if not kernels["1"] and len(tower_copy) > 1:
-                kernels["1"].append(kernels["2"].pop())
-            elif not kernels["3"] and len(tower_copy) > 1:
-                kernels["3"].append(kernels["2"].pop())
-            elif kernels["1"] and kernels["1"][-1] == disk + 1:
-                kernels["1"].append(kernels["2"].pop())
-            elif kernels["3"] and kernels["3"][-1] == disk + 1:
-                kernels["3"].append(kernels["2"].pop())
-        elif disk in kernels["3"] and disk == kernels["3"][-1]:  # если диск находится в 3-м стержне сверху
-            if not kernels["1"] and len(tower_copy) > 1:
-                kernels["1"].append(kernels["3"].pop())
-            elif not kernels["2"] and len(tower_copy) > 1:
-                kernels["2"].append(kernels["3"].pop())
-            elif kernels["1"] and kernels["1"][-1] == disk + 1:
-                kernels["1"].append(kernels["3"].pop())
-            elif kernels["2"] and kernels["2"][-1] == disk + 1:
-                kernels["2"].append(kernels["3"].pop())
-    if max(tower_copy) in kernels["3"]:
-        tower_copy.remove(max(tower_copy))
+tower = list(range(number_of_disks, 0, -1))
+# kernels = {"1": tower, "2": [], "3": []}
+kernels = [tower, [], []]
+
+all_disks = deepcopy(tower)[::-1]
+
+while kernels[2] != tower:
+
+    top_layer = [kernel[-1] if kernel else None for kernel in kernels]  # верхний слой стержней
+      # тек. стерень и диск
+    for kernel, disk in enumerate(all_disks):  # ищем в каком из стержней есть текущий диск
+
+        if disk == top_layer[kernel]:  # диск есть в стержне
+
+            remove_disk = kernels[kernel].pop() # извлечение диска из текущего стержня kernel
+
+            # оставшиеся стержни (если kernel=0, то ost_kernels = (1,2))
+            another_kernels = (((kernel + 1) % 3), ((kernel + 2) % 3))
+
+            for kernel_from_another in another_kernels:
+                if kernels[kernel_from_another] and top_layer[kernel_from_another] == disk + 1:# если стержень не пуст и величина ДИСКА меньше величины верхнего диска на 1
+
+                    kernels[kernel_from_another].append(remove_disk)
+
+                # elif
+
+                elif not kernels[kernel_from_another]:  # пустой стержень
+
+                    kernels[kernel_from_another].append(remove_disk)  # вставка в другой стержень
+
+        pass
+    if max(all_disks) in kernels[2]:
+        all_disks.remove(max(all_disks))
+
     print(kernels)
