@@ -1,8 +1,8 @@
 import sqlite3
 
 
-def create_table(database_name: str):
-    with sqlite3.connect(f"{database_name}.sqlite3") as session:
+def create_table(database: str):
+    with sqlite3.connect(f"{database}.sqlite3") as session:
         cursor = session.cursor()
         cursor.execute(
             """CREATE TABLE user (
@@ -18,7 +18,7 @@ def create_table(database_name: str):
 
 
 def main():
-    create_table("users")
+    create_table(database="users")
 
 
 if __name__ == '__main__':
