@@ -23,7 +23,7 @@ def show_table(data: list) -> None:
 
 
 def main():
-    print(("-" * 25) + "Product database" + ("-" * 25))
+    print(("-" * 45) + "Product database" + ("-" * 45))
     while True:
         print("""Select action:
     1) Create table of products;
@@ -34,7 +34,9 @@ def main():
     6) Exit.""")
         action = int(input("Selection: "))
 
-        if action == 1:  # CREATE
+        # CREATE
+
+        if action == 1:
             try:
                 create_table()
             except sqlite3.OperationalError:
@@ -51,14 +53,18 @@ def main():
                     else:
                         print("incorrect choice!")
 
-        elif action == 2:  # READ
+        # READ
+
+        elif action == 2:
             try:
                 reading_data = read_data()
                 show_table(reading_data)
             except sqlite3.OperationalError:
                 print("No such table. Create new it.")
 
-        elif action == 3:  # INSERT
+        # INSERT
+
+        elif action == 3:
             while True:
                 field = input("Enter field separated by commas by pattern:\n'product name, price, quantity, comment'\n")
                 check = re.match(r"[\d\w ]+, ?\d+(\.\d+)?, ?\d+, ?[\d\w ]+", field)
@@ -69,11 +75,13 @@ def main():
                 else:
                     print("Incorrect data.")
 
-        elif action == 4:  # UPDATE
+        # UPDATE
+
+        elif action == 4:
             show_table(read_data())
             id_number = int(input("Enter id: "))
             edit_field = read_data(id_number)
-            edit_field = [list(edit_field[0])]
+            edit_field = [list(edit_field[0])]  # [()] --> [[]] for editing
             while True:
                 show_table(edit_field)
                 print("""What column do you want to change?
@@ -96,11 +104,16 @@ def main():
                 else:
                     print("Incorrect choice!")
                 update_data(*edit_field[0])
-        elif action == 5:  # REMOVE
+
+        # REMOVE
+
+        elif action == 5:
             id_number = int(input("Enter id: "))
             remove_data(id_number)
 
-        elif action == 6:  # EXIT
+        # EXIT
+
+        elif action == 6:
             print("Exit from program.")
             break
 
