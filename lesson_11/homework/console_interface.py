@@ -65,14 +65,16 @@ def menu_update_data():
     id_number = int(input("Enter id: "))
     edit_field = read_data(id_number)
     edit_field = [list(edit_field[0])]  # [()] --> [[]] for editing
-    while True:
+    run = True
+    while run:
         show_table(edit_field)
         print("""What column do you want to change?
         1) Product name;
         2) Price;
         3) Quantity;
         4) Comment;
-        5) Save changes.""")
+        5) Save changes;
+        6) Cancel changes""")
         action = int(input("Selection: "))
         if action == 1:
             edit_field[0][1] = input("Enter product name: ")
@@ -83,9 +85,14 @@ def menu_update_data():
         elif action == 4:
             edit_field[0][4] = input("Enter comment: ")
         elif action == 5:
+            run = False
+        elif action == 6:
+            print("Cancel changes.")
             break
         else:
             print("Incorrect choice!")
+    else:
+        print("Changes applied.")
         update_data(*edit_field[0])
 
 
@@ -99,10 +106,10 @@ def main():
     while True:
         print("""Select action:
     1) Create table of products;
-    2) Read data of product by it 'id';
-    3) Insert data of product;
-    4) Update data of product by it 'id';
-    5) Remove data of product by it 'id';
+    2) Read data of products;
+    3) Insert data of products;
+    4) Update data of products;
+    5) Remove data of products;
     6) Exit.""")
         action = int(input("Selection: "))
 
