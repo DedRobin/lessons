@@ -18,7 +18,3 @@ def read_data(id_name: int = None) -> list:
                 """, (id_name,)
             )
     return cursor.fetchall()
-
-
-if __name__ == '__main__':
-    print(read_data())
