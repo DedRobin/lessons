@@ -9,7 +9,17 @@ from add_data import add_data
 from read_data import read_data
 from update_data import update_data
 from remove_data import remove_data
-from clear_table import drop_table
+from drop_table import drop_table
+
+
+def show_table(data: list) -> None:
+    columns = ["ID", "Product name", "Price", "Quantity", "Comment"]
+    print(("|" + "-" * 20) * 5 + "|")
+    print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format(*columns))
+    print(("|" + "-" * 20) * 5 + "|")
+    for item in data:
+        print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format(*item))
+    print(("|" + "-" * 20) * 5 + "|")
 
 
 def main():
@@ -28,38 +38,44 @@ def main():
             try:
                 create_table()
             except sqlite3.OperationalError:
-                print("Are you sure? Creating new table will delete old table.")
-                action = input("Selection(y/n): ")
-                if action.lower() == "y":
-                    drop_table()
-                    create_table()
+                while True:
+                    print("Are you sure? Creating new table will delete old table.")
+                    action = input("Selection(y/n): ")
+                    if action.lower() == "y":
+                        drop_table()
+                        create_table()
+                        print("Table is created.")
+                        break
+                    elif action.lower() == "n":
+                        break
+                    else:
+                        print("incorrect choice!")
 
         elif action == 2:  # READ
             try:
-                result = read_data()
-                if not result:
-                    print("Table is empty.")
-                for item in result:
-                    print(item)
+                reading_data = read_data()
+                show_table(reading_data)
             except sqlite3.OperationalError:
                 print("No such table. Create new it.")
 
         elif action == 3:  # INSERT
             while True:
                 field = input("Enter field separated by commas by pattern:\n'product name, price, quantity, comment'\n")
-                check = re.match(r"[\d\w ]+, ?[\d\w]+, ?[\d\w]+, ?[\d\w ]+", field)
+                check = re.match(r"[\d\w ]+, ?\d+(\.\d+)?, ?\d+, ?[\d\w ]+", field)
                 if check:
                     field = field.split(",")
                     add_data(*field)
                     break
                 else:
                     print("Incorrect data.")
+
         elif action == 4:  # UPDATE
+            show_table(read_data())
             id_number = int(input("Enter id: "))
             edit_field = read_data(id_number)
-            edit_field = list(edit_field[0])
+            edit_field = [list(edit_field[0])]
             while True:
-                print(edit_field[1:])
+                show_table(edit_field)
                 print("""What column do you want to change?
     1) Product name;
     2) Price;
@@ -68,21 +84,22 @@ def main():
     5) Save changes.""")
                 action = int(input("Selection: "))
                 if action == 1:
-                    edit_field[1] = input("Enter data: ")
+                    edit_field[0][1] = input("Enter product name: ")
                 elif action == 2:
-                    edit_field[2] = input("Enter data: ")
+                    edit_field[0][2] = input("Enter price: ")
                 elif action == 3:
-                    edit_field[3] = input("Enter data: ")
+                    edit_field[0][3] = input("Enter quantity: ")
                 elif action == 4:
-                    edit_field[4] = input("Enter data: ")
+                    edit_field[0][4] = input("Enter comment: ")
                 elif action == 5:
                     break
                 else:
                     print("Incorrect choice!")
-                update_data(*edit_field)
+                update_data(*edit_field[0])
         elif action == 5:  # REMOVE
-            id_number = int(input("Ented id: "))
+            id_number = int(input("Enter id: "))
             remove_data(id_number)
+
         elif action == 6:  # EXIT
             print("Exit from program.")
             break
