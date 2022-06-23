@@ -33,9 +33,9 @@ if __name__ == "__main__":
     engine = create_db_engine()
     create_db_engine_if_not_exists(engine=engine)
 
-    Base.metadata.create_all(engine)
-    CurrentSession = sessionmaker(bind=engine)
-    current_session = CurrentSession()
+    # Base.metadata.create_all(engine)
+    # CurrentSession = sessionmaker(bind=engine)
+    # current_session = CurrentSession()
 
     # user = create_user(session=current_session,
     #                    email="pavelrabekin@gmail.com",
