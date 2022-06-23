@@ -3,7 +3,9 @@ from models import Base, User, Product, Purchase
 from utils import create_db_engine, create_db_engine_if_not_exists
 
 from add_product import add_product
+from read_product import read_product
 from remove_product import remove_product
+from update_product import update_product
 
 
 def main():
@@ -38,7 +40,7 @@ def main():
     2) Read product data;
     3) Update product;
     4) Remove product;
-    5) Come back.""")
+    5) <-- Come back.""")
                     try:
                         selection_for_1 = int(input("Selection: "))
                     except ValueError:
@@ -50,16 +52,26 @@ def main():
 
                         # READ PRODUCT
                         elif selection_for_1 == 2:
-                            pass
-
-                        elif selection_for_1 == 3:
-                            pass
+                            read_product(session=current_session)
 
                         # UPDATE PRODUCT
+                        elif selection_for_1 == 3:
+                            try:
+                                id_number_3 = int(input("Enter id:"))
+                            except ValueError:
+                                print(f"Incorrect input.")
+                            else:
+                                update_product(session=current_session, id_number=id_number_3)
+
+                        # REMOVE PRODUCT
                         elif selection_for_1 == 4:
-                            id_number = int(input("Enter id:"))
-                            remove_product(session=current_session, id_number=id_number)
-                            print(f"Row by id = {id_number} is removed.")
+                            try:
+                                id_number_4 = int(input("Enter id:"))
+                            except ValueError:
+                                print(f"Incorrect input.")
+                            else:
+                                remove_product(session=current_session, id_number=id_number_4)
+                                print(f"Row by id = {id_number_4} is removed.")
 
                         # COME BACK
                         elif selection_for_1 == 5:
