@@ -45,8 +45,8 @@ if __name__ == "__main__":
     #                    city="Minsk",
     #                    address="Bachilo 4-134")
 
-    user = current_session.query(User).filter_by(email="pavelrabekin@gmail.com").first()
-    update_or_create(session=current_session,
-                     user=user,
-                     city="new city",
-                     address="new address")
+    # user = current_session.query(User).filter_by(email="pavelrabekin@gmail.com").first()
+    # update_or_create(session=current_session,
+    #                  user=user,
+    #                  city="new city",
+    #                  address="new address")
