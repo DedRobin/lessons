@@ -15,27 +15,38 @@ def create_user(session: Session, email: str, password: str, phone: str, age: in
     return user
 
 
-def update_or_create(session: Session, user: User, city: str, address: str) -> Address:
+def update_or_create(session: Session, user: Profile, city: str, address: str) -> Address:
     if len(user.addresses):
-        address = user.addresses[0]
-        address.city = city
-        address.address = address
+        current_address = user.addresses[0]
+        current_address.city = city
+        current_address.address = address
     else:
-        address = Address(user=user, city=city, address=address)
+        current_address = Address(user=user, city=city, address=address)
 
-    session.add(address)
+    session.add(current_address)
     session.commit()
 
-    return address
+    return current_address
+
+
+def search_by_age(session: Session, input_profiles: list):
+    for profile in input_profiles:
+        print(profile.user.email)
 
 
 if __name__ == "__main__":
     engine = create_db_engine()
     create_db_engine_if_not_exists(engine=engine)
 
-    # Base.metadata.create_all(engine)
-    # CurrentSession = sessionmaker(bind=engine)
-    # current_session = CurrentSession()
+    Base.metadata.create_all(engine)
+    CurrentSession = sessionmaker(bind=engine)
+    current_session = CurrentSession()
+
+    # data = [[current_session, "pavelrabekin@gmail.com", "123qweasd", "+375259825663", 28, "Minsk", "Bachilo 4-134"],
+    #         [current_session, "romanustomenko@gmail.com", "asdxcz", "+375334328676", 18, "Grodno", "Kabushkino 123-14"],
+    #         [current_session, "karinadoroh@gmail.com", "145afsd", "+375299815348", 24, "Brest", "Lisua 1-73"]]
+    # for field in data:
+    #     user = create_user(*field)
 
     # user = create_user(session=current_session,
     #                    email="pavelrabekin@gmail.com",
@@ -50,3 +61,6 @@ if __name__ == "__main__":
     #                  user=user,
     #                  city="new city",
     #                  address="new address")
+
+    users_by_age = current_session.query(Profile).filter(Profile.age == 18).all()
+    search_by_age(current_session, users_by_age)
