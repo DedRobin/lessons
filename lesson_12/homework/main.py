@@ -1,20 +1,15 @@
-from sqlalchemy.orm import sessionmaker
-from models import Base, User, Product, Purchase
-from utils import create_db_engine, create_db_engine_if_not_exists
+from create_current_session import create_current_session
 
 from add_product import add_product
 from read_product import read_product
 from remove_product import remove_product
 from update_product import update_product
+from buy_products import buy_product
+from read_all_customers_purchases import read_all_customers_purchases
 
 
 def main():
-    engine = create_db_engine()
-    create_db_engine_if_not_exists(engine=engine)
-
-    Base.metadata.create_all(engine)
-    CurrentSession = sessionmaker(bind=engine)
-    current_session = CurrentSession()
+    current_session = create_current_session()
 
     run = True
 
@@ -46,6 +41,7 @@ def main():
                     except ValueError:
                         print(f"Incorrect input.")
                     else:
+
                         # CREATE PRODUCT
                         if selection_for_1 == 1:
                             add_product(session=current_session)
@@ -90,27 +86,28 @@ def main():
                     print("""Menu -> Purchases:
     1) Buy product;
     2) Show all customer's purchases;
-    3) Update product;
-    4) Remove product;
-    5) Come back.""")
+    3) Filter purchases(Not work);
+    4) Come back.""")
                     try:
                         selection_for_2 = int(input("Selection: "))
                     except ValueError:
                         print("Incorrect input.")
                     else:
+
+                        # BUY PRODUCT
                         if selection_for_2 == 1:
-                            pass
+                            buy_product(session=current_session)
 
+                        # SHOW
                         elif selection_for_2 == 2:
-                            pass
+                            read_all_customers_purchases(session=current_session)
 
+                        # FILTER
                         elif selection_for_2 == 3:
                             pass
 
+                        # COME BACK
                         elif selection_for_2 == 4:
-                            pass
-
-                        elif selection_for_2 == 5:
                             run_for_2 = False
 
                         else:

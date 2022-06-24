@@ -5,7 +5,7 @@ from sqlalchemy_utils import create_database, database_exists
 from platform import system
 
 DB_PATH = Path(__file__).resolve().parent / "shop.sqlite3"
-DB_ECHO = True
+DB_ECHO = False
 SYSTEM = system()
 
 
