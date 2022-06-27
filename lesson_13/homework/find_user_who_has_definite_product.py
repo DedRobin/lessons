@@ -11,4 +11,4 @@ def find_user_who_has_definite_product(session: Session, product_name: str) -> N
 
 if __name__ == '__main__':
     test_session = create_current_session()
-    find_user_who_has_definite_product(test_session, "product 49")
+    find_user_who_has_definite_product(test_session, "doctor")

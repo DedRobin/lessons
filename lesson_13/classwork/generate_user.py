@@ -9,8 +9,7 @@ def generate_user(session: Session) -> None:
 
     user = User(email=fake.email(), password=fake.password())
     profile = Profile(user=user,
-                      first_name=fake.first_name(),
-                      last_name=fake.last_name(),
+                      name=fake.name(),
                       phone=fake.phone_number(),
                       age=fake.pyint(min_value=18, max_value=80))
     address = Address(user=user, city=fake.city(), address=fake.address())
