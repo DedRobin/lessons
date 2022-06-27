@@ -1,4 +1,5 @@
 from re import match
+from create_current_session import create_current_session
 from sqlalchemy.orm import Session
 from models import Product
 
@@ -22,3 +23,8 @@ def add_product(session: Session) -> None:
         session.commit()
     else:
         print("Incorrect data.")
+
+
+if __name__ == '__main__':
+    test_session = create_current_session()
+    add_product(test_session)
