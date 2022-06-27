@@ -14,10 +14,10 @@ def generate_user(session: Session) -> None:
                       phone=fake.phone_number(),
                       age=fake.pyint(min_value=18, max_value=80))
     address = Address(user=user, city=fake.city(), address=fake.address())
-    product = Product(product_name=f"product {fake.pyint(min_value=1, max_value=100)}",
+    product = Product(product_name=fake.word(),
                       price=fake.pyint(min_value=1, max_value=1000),
                       product_quantity=fake.pyint(min_value=1, max_value=100),
-                      comment=f"comment {fake.pyint(min_value=1, max_value=100)}")
+                      comment=f"comment {fake.word()}")
     session.add_all((user, profile, address, product))
     session.commit()
 

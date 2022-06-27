@@ -8,8 +8,8 @@ from random import choice
 def generate_purchase(session: Session) -> None:
     fake = Faker()
 
-    user = choice(session.query(User).filter_by().all())
-    product = choice(session.query(Product).filter_by().all())
+    user = choice(session.query(User).filter_by().all())  # random user
+    product = choice(session.query(Product).filter_by().all())  # random product
     purchase = Purchase(user=user,
                         product=product,
                         purchase_quantity=fake.pyint(min_value=1, max_value=product.product_quantity)
