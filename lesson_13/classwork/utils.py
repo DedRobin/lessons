@@ -10,7 +10,7 @@ DB_ECHO = True
 
 def create_db_engine():
     engine = create_engine(
-        f"postgresql://{DB_USER}:{DB_PASSWORD}@localhost/{DB_NAME}", echo=True,
+        f"postgresql://{DB_USER}:{DB_PASSWORD}@localhost/{DB_NAME}", echo=DB_ECHO,
     )
     return engine
 

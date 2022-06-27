@@ -1,8 +1,9 @@
 from create_tables import create_current_session
 from faker import Faker
 from sqlalchemy.orm import Session
-from models import User, Profile, Address, Purchase, Product
+from models import User, Purchase, Product
 from random import choice
+
 
 def generate_purchase(session: Session) -> None:
     fake = Faker()
@@ -20,4 +21,5 @@ def generate_purchase(session: Session) -> None:
 
 if __name__ == '__main__':
     test_session = create_current_session()
-    generate_purchase(test_session)
+    for _ in range(50):
+        generate_purchase(test_session)
