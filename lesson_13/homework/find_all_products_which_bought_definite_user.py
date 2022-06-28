@@ -5,11 +5,12 @@ from sqlalchemy.sql import or_, and_
 
 
 def find_all_products_which_bought_definite_user(session: Session, name: str) -> None:
-    products = session.query(Product).join(Purchase).filter(Purchase.product.product_name == name).all()
+    products = session.query(Product).join(Purchase).join(User).join(Profile).filter(Profile.name == name).all()
     for product in products:
         print(product.product_name)
 
 
 if __name__ == '__main__':
     test_session = create_current_session()
-    find_all_products_which_bought_definite_user(test_session, "Vanessa Jenkins")
+    find_all_products_which_bought_definite_user(test_session)
+    # find_all_products_which_bought_definite_user(test_session, "Kelly Wallace")
