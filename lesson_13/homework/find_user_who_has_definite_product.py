@@ -1,4 +1,4 @@
-from create_tables import create_current_session
+from __create_tables import create_current_session
 from models import User, Purchase, Product
 from sqlalchemy.orm import Session
 
@@ -11,4 +11,4 @@ def find_user_who_has_definite_product(session: Session, product_name: str) -> N
 
 if __name__ == '__main__':
     test_session = create_current_session()
-    find_user_who_has_definite_product(test_session, "doctor")
+    find_user_who_has_definite_product(test_session, "place")

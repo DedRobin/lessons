@@ -1,4 +1,4 @@
-from create_tables import create_current_session
+from __create_tables import create_current_session
 from models import User, Purchase, Product
 from sqlalchemy.orm import Session
 
