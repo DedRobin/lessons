@@ -5,7 +5,8 @@ from sqlalchemy.sql import or_, and_
 
 
 def find_all_users_who_bought_definite_product(session: Session, product_name: str) -> None:
-    profiles = session.query(Profile).join(User).join(Purchase).join(Product).filter(Product.product_name == product_name)
+    profiles = session.query(Profile).join(User).join(Purchase).join(Product).filter(
+        Product.product_name == product_name)
     for profile in profiles:
         print(profile.name)
 
