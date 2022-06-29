@@ -12,5 +12,5 @@ def find_all_products_which_bought_definite_user(session: Session, name: str) ->
 
 if __name__ == '__main__':
     test_session = create_current_session()
-    find_all_products_which_bought_definite_user(test_session)
-    # find_all_products_which_bought_definite_user(test_session, "Kelly Wallace")
+    # find_all_products_which_bought_definite_user(test_session)
+    find_all_products_which_bought_definite_user(test_session, "Lori Harris")
