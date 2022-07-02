@@ -1,11 +1,17 @@
 asgiref==3.5.2
 certifi==2022.5.18.1
 charset-normalizer==2.0.12
+click==8.1.3
 Django==4.0.4
 dog==13
 Faker==13.14.0
+Flask==2.1.2
 greenlet==1.1.2
 idna==3.3
+importlib-metadata==4.12.0
+itsdangerous==2.1.2
+Jinja2==3.1.2
+MarkupSafe==2.1.1
 numpy==1.22.4
 psycopg2-binary==2.9.3
 python-dateutil==2.8.2
@@ -15,3 +21,5 @@ SQLAlchemy==1.4.37
 SQLAlchemy-Utils==0.38.2
 sqlparse==0.4.2
 urllib3==1.26.9
+Werkzeug==2.1.2
+zipp==3.8.0
