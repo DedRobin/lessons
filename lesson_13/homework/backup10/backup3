@@ -1,0 +1,697 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.4
+-- Dumped by pg_dump version 14.4
+
+-- Started on 2022-07-03 23:19:11
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 216 (class 1259 OID 16701)
+-- Name: address; Type: TABLE; Schema: public; Owner: dedrobin
+--
+
+CREATE TABLE public.address (
+    id integer NOT NULL,
+    city character varying,
+    address character varying,
+    user_id integer
+);
+
+
+ALTER TABLE public.address OWNER TO dedrobin;
+
+--
+-- TOC entry 215 (class 1259 OID 16700)
+-- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: dedrobin
+--
+
+CREATE SEQUENCE public.address_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.address_id_seq OWNER TO dedrobin;
+
+--
+-- TOC entry 3357 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dedrobin
+--
+
+ALTER SEQUENCE public.address_id_seq OWNED BY public.address.id;
+
+
+--
+-- TOC entry 212 (class 1259 OID 16678)
+-- Name: product; Type: TABLE; Schema: public; Owner: dedrobin
+--
+
+CREATE TABLE public.product (
+    id integer NOT NULL,
+    product_name character varying,
+    price double precision,
+    product_quantity integer,
+    comment character varying
+);
+
+
+ALTER TABLE public.product OWNER TO dedrobin;
+
+--
+-- TOC entry 211 (class 1259 OID 16677)
+-- Name: product_id_seq; Type: SEQUENCE; Schema: public; Owner: dedrobin
+--
+
+CREATE SEQUENCE public.product_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.product_id_seq OWNER TO dedrobin;
+
+--
+-- TOC entry 3358 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dedrobin
+--
+
+ALTER SEQUENCE public.product_id_seq OWNED BY public.product.id;
+
+
+--
+-- TOC entry 214 (class 1259 OID 16687)
+-- Name: profile; Type: TABLE; Schema: public; Owner: dedrobin
+--
+
+CREATE TABLE public.profile (
+    id integer NOT NULL,
+    name character varying,
+    phone character varying,
+    age integer,
+    user_id integer
+);
+
+
+ALTER TABLE public.profile OWNER TO dedrobin;
+
+--
+-- TOC entry 213 (class 1259 OID 16686)
+-- Name: profile_id_seq; Type: SEQUENCE; Schema: public; Owner: dedrobin
+--
+
+CREATE SEQUENCE public.profile_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.profile_id_seq OWNER TO dedrobin;
+
+--
+-- TOC entry 3359 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: profile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dedrobin
+--
+
+ALTER SEQUENCE public.profile_id_seq OWNED BY public.profile.id;
+
+
+--
+-- TOC entry 218 (class 1259 OID 16715)
+-- Name: purchase; Type: TABLE; Schema: public; Owner: dedrobin
+--
+
+CREATE TABLE public.purchase (
+    id integer NOT NULL,
+    purchase_quantity integer,
+    user_id integer,
+    product_id integer
+);
+
+
+ALTER TABLE public.purchase OWNER TO dedrobin;
+
+--
+-- TOC entry 217 (class 1259 OID 16714)
+-- Name: purchase_id_seq; Type: SEQUENCE; Schema: public; Owner: dedrobin
+--
+
+CREATE SEQUENCE public.purchase_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.purchase_id_seq OWNER TO dedrobin;
+
+--
+-- TOC entry 3360 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: purchase_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dedrobin
+--
+
+ALTER SEQUENCE public.purchase_id_seq OWNED BY public.purchase.id;
+
+
+--
+-- TOC entry 210 (class 1259 OID 16669)
+-- Name: user; Type: TABLE; Schema: public; Owner: dedrobin
+--
+
+CREATE TABLE public."user" (
+    id integer NOT NULL,
+    email character varying,
+    password character varying
+);
+
+
+ALTER TABLE public."user" OWNER TO dedrobin;
+
+--
+-- TOC entry 209 (class 1259 OID 16668)
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: dedrobin
+--
+
+CREATE SEQUENCE public.user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_id_seq OWNER TO dedrobin;
+
+--
+-- TOC entry 3361 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dedrobin
+--
+
+ALTER SEQUENCE public.user_id_seq OWNED BY public."user".id;
+
+
+--
+-- TOC entry 3187 (class 2604 OID 16704)
+-- Name: address id; Type: DEFAULT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.address ALTER COLUMN id SET DEFAULT nextval('public.address_id_seq'::regclass);
+
+
+--
+-- TOC entry 3185 (class 2604 OID 16681)
+-- Name: product id; Type: DEFAULT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.product ALTER COLUMN id SET DEFAULT nextval('public.product_id_seq'::regclass);
+
+
+--
+-- TOC entry 3186 (class 2604 OID 16690)
+-- Name: profile id; Type: DEFAULT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.profile ALTER COLUMN id SET DEFAULT nextval('public.profile_id_seq'::regclass);
+
+
+--
+-- TOC entry 3188 (class 2604 OID 16718)
+-- Name: purchase id; Type: DEFAULT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.purchase ALTER COLUMN id SET DEFAULT nextval('public.purchase_id_seq'::regclass);
+
+
+--
+-- TOC entry 3184 (class 2604 OID 16672)
+-- Name: user id; Type: DEFAULT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_id_seq'::regclass);
+
+
+--
+-- TOC entry 3349 (class 0 OID 16701)
+-- Dependencies: 216
+-- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: dedrobin
+--
+
+COPY public.address (id, city, address, user_id) FROM stdin;
+1	New Bianca	072 Williams Cliff Suite 599\nWest Natalieshire, PA 96151	1
+2	Port Harold	41484 Harmon Pike\nSylviashire, IN 46679	2
+3	Hudsonshire	626 Matthew Lake Apt. 188\nLake Kristin, SC 22695	3
+4	Millerbury	9841 Samantha Shoals\nNicoleland, MS 91018	4
+5	Curtisburgh	89621 Kim Gardens\nPort Tylerville, MD 35750	5
+6	Scottfort	547 Kenneth Corner Apt. 920\nNew Tammybury, WA 07010	6
+7	West Theodore	29772 Moore Mission\nEast John, ID 67804	7
+8	West Robertbury	808 Ashley Meadow Apt. 278\nApriltown, SD 97072	8
+9	Arielside	93542 Whitaker Port\nJensenchester, AZ 57999	9
+10	Bridgetfurt	1921 Rebecca Spring\nCervantesmouth, CA 88211	10
+11	Snydermouth	01179 Jennifer Ports\nRichardtown, AZ 19052	11
+12	Barberbury	PSC 5508, Box 2738\nAPO AP 16571	12
+13	East Sherry	948 Lance Extensions Apt. 930\nPort Brianmouth, WV 23644	13
+14	Johnsonside	537 Gina Mission\nNew Austin, NM 59457	14
+15	West Anthonyland	78208 Archer Course Suite 931\nGouldstad, IA 45056	15
+16	Thomasville	Unit 8042 Box 6743\nDPO AE 12235	16
+17	Lake Amandahaven	820 Rodriguez Lane Apt. 595\nNew Michaelview, VT 61154	17
+18	Montgomeryhaven	57905 Foster Summit Suite 418\nPort Patrick, OR 90312	18
+19	Port Darrenshire	73864 Williams Highway Apt. 840\nHillville, OH 56102	19
+20	East Dana	65525 Finley View\nNorth Nicholetown, KY 41449	20
+21	West Mercedes	0341 Thomas Trail\nWest Tashahaven, DE 08802	21
+22	South Jeremy	689 Adams Alley Suite 323\nAlvarezmouth, MS 93964	22
+23	Francofurt	Unit 3746 Box 0586\nDPO AP 45807	23
+24	North Linda	86960 Kennedy Isle\nLake Natasha, CT 68912	24
+25	Lucasville	730 Sweeney Canyon Apt. 798\nJohnsonberg, ND 82170	25
+26	East Andreafort	925 Spears Rest Apt. 969\nStevenfort, KS 14309	26
+27	Port Christiantown	279 Nelson Mountains\nJeremystad, WY 98290	27
+28	Joelshire	1936 Collier Forest\nRobertburgh, CT 05997	28
+29	Singhfurt	54600 Porter Squares\nVictorville, HI 03673	29
+30	Port Joseph	24990 Regina Alley Apt. 861\nLake Steven, TX 59715	30
+31	South Brooke	80575 Diaz Underpass Suite 194\nNorth Danielshire, ND 30211	31
+32	Garciafurt	3172 Devin Rapids\nEast Meganside, AZ 82454	32
+33	East Stephanie	50393 Thomas Port Suite 506\nJoshuafort, SD 68432	33
+34	New Lisa	105 Monica Ford\nRaymondview, NY 07132	34
+35	Farrellhaven	03656 Moore Cove Apt. 913\nNew Williamborough, OR 22582	35
+36	South James	6767 Riley Parks\nClarktown, NM 76838	36
+37	Sandraville	3365 Keith Forest Suite 629\nChristinafort, TN 68640	37
+38	Billyland	95875 Palmer Run Suite 368\nLisamouth, VT 45679	38
+39	Daleport	45758 Hall Wells\nPort Brianborough, MN 76327	39
+40	Roberttown	92335 Alison Drive Suite 221\nEast Helenside, GA 34680	40
+41	Kaylaville	5571 Patricia Shores Apt. 203\nRitatown, ID 15017	41
+42	Scottbury	03178 Amber Island Suite 171\nJoshuamouth, CA 44046	42
+43	Armstrongland	78026 Danielle Cliffs Apt. 077\nMossburgh, MS 23138	43
+44	West Andrew	659 Morgan Junction Apt. 555\nNorth Glennbury, AL 86440	44
+45	West Christopherfurt	96885 Vega Expressway Apt. 470\nMartinezton, WY 80106	45
+46	Pamelaland	045 Trevor Expressway\nNorth Saraborough, OK 88055	46
+47	Lake Steven	971 Gonzalez Wall Apt. 058\nNorth Katherine, OH 06230	47
+48	Joannhaven	USS Smith\nFPO AP 51857	48
+49	East Erinchester	81849 Solomon Court Apt. 439\nCharlestown, MN 91874	49
+50	East Chelsea	0718 Flores Circle Apt. 257\nRobinsonshire, WI 44375	50
+\.
+
+
+--
+-- TOC entry 3345 (class 0 OID 16678)
+-- Dependencies: 212
+-- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: dedrobin
+--
+
+COPY public.product (id, product_name, price, product_quantity, comment) FROM stdin;
+1	interview	120	87	comment allow
+2	new	463	41	comment practice
+3	apply	869	50	comment trade
+4	nor	85	12	comment least
+5	analysis	648	37	comment follow
+6	certainly	569	90	comment second
+7	even	361	85	comment stuff
+8	fear	850	18	comment art
+9	red	752	25	comment very
+10	program	815	55	comment personal
+11	floor	935	55	comment author
+12	law	592	78	comment beautiful
+13	performance	595	6	comment benefit
+14	herself	260	3	comment kid
+15	real	7	88	comment now
+16	hold	69	35	comment the
+17	fine	288	2	comment last
+18	single	796	60	comment general
+19	turn	312	34	comment there
+20	economic	140	58	comment resource
+21	live	837	81	comment song
+22	leave	938	62	comment without
+23	great	571	9	comment story
+24	movement	561	20	comment back
+25	wife	137	68	comment election
+26	rock	771	15	comment born
+27	team	775	57	comment character
+28	figure	617	3	comment already
+29	major	557	22	comment something
+30	those	833	22	comment name
+31	agency	981	42	comment foot
+32	source	522	64	comment interview
+33	store	925	53	comment stage
+34	beyond	829	42	comment give
+35	choice	300	9	comment young
+36	power	933	98	comment role
+37	east	773	45	comment guy
+38	hot	928	59	comment administration
+39	white	255	63	comment property
+40	say	54	86	comment decision
+41	rise	760	83	comment thought
+42	compare	590	75	comment design
+43	cell	453	95	comment exactly
+44	very	823	63	comment plant
+45	page	462	4	comment decade
+46	that	763	80	comment around
+47	wife	789	14	comment clear
+48	Mrs	865	78	comment structure
+49	worry	914	62	comment door
+50	new	917	14	comment catch
+\.
+
+
+--
+-- TOC entry 3347 (class 0 OID 16687)
+-- Dependencies: 214
+-- Data for Name: profile; Type: TABLE DATA; Schema: public; Owner: dedrobin
+--
+
+COPY public.profile (id, name, phone, age, user_id) FROM stdin;
+1	Shawn Kent	370-156-1357x0502	39	1
+2	Alyssa Waller	001-764-299-4724x68288	68	2
+3	Sharon Berger	007-790-1360x151	78	3
+4	Dylan Leach	(688)354-2068x571	26	4
+5	Vanessa Jenkins	387-760-5414x2173	34	5
+6	Bonnie Gray	001-087-628-4690	70	6
+7	Sheila Blake	544-115-9487x164	54	7
+8	Kelly Wallace	006-466-6068	62	8
+9	Keith Horton	(214)368-3216x9959	68	9
+10	Ryan Wright	675.887.5126x40633	22	10
+11	Kenneth Gould	2245394399	80	11
+12	Nicholas Beard	2341657767	79	12
+13	Carolyn Knapp	016.145.4449	38	13
+14	Joseph Davis	001-494-740-8040	26	14
+15	Priscilla Crawford	(928)598-4271x5190	50	15
+16	Michelle Hernandez	2588525085	61	16
+17	Gina Curry	001-445-949-4007x7723	59	17
+18	James Moore	585.891.3400	29	18
+19	Morgan Reilly	001-792-600-3759	45	19
+20	Connie Baker	7016096652	59	20
+21	Dennis Johnson	258-594-2691x43115	66	21
+22	Jamie Drake	001-557-564-4106x394	35	22
+23	Taylor Burns	692.880.6067x47403	32	23
+24	Amy Holland	001-745-489-8500x10635	30	24
+25	Jaime Ford	001-987-734-2233x372	57	25
+26	Jessica Garza	+1-982-066-2139	31	26
+27	Cheryl Ward	+1-314-829-9862x96697	63	27
+28	James Werner	(750)235-7943x5587	69	28
+29	Douglas Price	947-190-3488	32	29
+30	Stephen Lee	001-751-339-1029x92283	46	30
+31	William Martin	(106)215-6644	37	31
+32	Charles Rios	+1-161-830-6674x28974	63	32
+33	Amy Smith	1036378570	53	33
+34	Daniel Lewis	+1-786-578-8839	21	34
+35	Susan Campbell	(714)274-3910x992	65	35
+36	Linda Miller	269.375.6515x9312	42	36
+37	Cheryl Allen	001-792-236-7058x670	62	37
+38	Angela Allen	(813)866-8368x303	66	38
+39	Benjamin Baird	989-808-0848x97394	57	39
+40	Robin Williams	(215)242-5701x412	60	40
+41	Penny Barrera	001-442-292-1897x71265	51	41
+42	Mitchell Skinner	617.172.0521x8000	54	42
+43	Michael Walsh	+1-625-856-4065x26142	69	43
+44	Brian Frost	984-373-2563x30728	74	44
+45	David Martinez	001-769-321-5886x1757	40	45
+46	Jeffrey Lopez	+1-619-887-2764x6332	70	46
+47	Michele Ward	001-733-742-7285x3514	46	47
+48	Christy Ramsey	+1-154-163-1187x937	66	48
+49	Peter Hudson	001-437-698-5576x87124	57	49
+50	Manuel Lopez	968-875-0873x69047	64	50
+\.
+
+
+--
+-- TOC entry 3351 (class 0 OID 16715)
+-- Dependencies: 218
+-- Data for Name: purchase; Type: TABLE DATA; Schema: public; Owner: dedrobin
+--
+
+COPY public.purchase (id, purchase_quantity, user_id, product_id) FROM stdin;
+1	3	8	39
+2	33	25	12
+3	32	33	41
+4	48	45	3
+5	11	45	31
+6	10	50	5
+7	5	29	26
+8	7	9	4
+9	5	9	36
+10	4	4	9
+11	32	8	19
+12	22	46	49
+13	39	42	3
+14	23	38	9
+15	39	34	44
+16	14	25	29
+17	41	20	34
+18	6	29	24
+19	13	49	16
+20	1	3	28
+21	47	33	10
+22	27	41	48
+23	70	35	40
+24	28	38	40
+25	67	19	7
+26	6	37	26
+27	2	28	32
+28	17	29	11
+29	39	10	32
+30	44	5	18
+31	1	10	12
+32	8	41	6
+33	35	21	34
+34	8	43	35
+35	44	26	20
+36	87	7	1
+37	46	42	27
+38	40	22	48
+39	59	38	12
+40	10	17	30
+41	26	42	5
+42	22	28	15
+43	19	32	1
+44	42	41	27
+45	27	22	7
+46	33	23	18
+47	50	50	22
+48	9	16	35
+49	3	8	4
+50	21	45	39
+\.
+
+
+--
+-- TOC entry 3343 (class 0 OID 16669)
+-- Dependencies: 210
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: dedrobin
+--
+
+COPY public."user" (id, email, password) FROM stdin;
+1	williamscarla@example.org	9dwX_3CnbZ
+2	upatterson@example.org	#7^ds+qqLs
+3	brett43@example.net	$9HeNiEh77
+4	jjohnson@example.com	d#h8x4xkqK
+5	griffinfrank@example.org	(K1M#5lEX9
+6	johncoleman@example.com	s+$8wUqt_8
+7	martinezwendy@example.org	W(86I*pkh(
+8	fullernicole@example.net	Dk848Uzt&A
+9	shanemorgan@example.com	^oDdHvDbh2
+10	zhall@example.org	M8Os0(y8%9
+11	zjennings@example.org	#KU9Qd*F+(
+12	nicolewagner@example.org	GdO@8Cwy$+
+13	icontreras@example.com	*kS9y+$ng7
+14	davidrichardson@example.org	_05MbX#wIz
+15	jamesmartin@example.org	*9V)OLK#sO
+16	jeffrey41@example.net	5h07Jr59#x
+17	tiffanycox@example.org	uZ3x(tRl)3
+18	cheryl91@example.org	2M6Vbf5b@O
+19	daleclark@example.com	c#2Kq+VL_#
+20	leslie51@example.com	95XcqOh)!z
+21	monicahardy@example.net	ldAo6nPy_7
+22	nwaller@example.net	(*k4FwR)hp
+23	gentrycindy@example.com	4p0jP02#(8
+24	jillhancock@example.net	(3#NoTN@Hr
+25	matthew47@example.org	53JFIk3v$%
+26	angelacampbell@example.com	%YT_uIj7v4
+27	brownconnie@example.net	6(1Ktrw^_d
+28	jfisher@example.net	WMG9me3$_4
+29	jeffreycollins@example.org	)4_0r6Xntm
+30	landryerica@example.com	TS8y0Fn0B&
+31	thomasrhonda@example.com	Ksh0D_IG#^
+32	santiagomadison@example.net	17UzWED3+V
+33	richard68@example.net	0aT85UIZZ&
+34	tyler43@example.org	_1iJUCcu9G
+35	susan55@example.net	@XC29Ufu&Q
+36	troyturner@example.org	e%YBC4QaUi
+37	jwilliams@example.com	x%Y7rZXD$r
+38	kylebrown@example.com	n4E1QR0a&&
+39	smithjanice@example.org	hd1Gbf_jJ^
+40	stephanierussell@example.com	K6NLr1vo)3
+41	jessica16@example.org	&50YZczF&)
+42	gina47@example.com	D0OMLqso*g
+43	adamreynolds@example.net	mMj2WR%v&+
+44	nfisher@example.org	X^810XgsfF
+45	lowekathy@example.org	_v43SjVf8d
+46	thomascarr@example.net	yiEU$(pb@4
+47	ricky47@example.com	qx3NS6cIZ@
+48	michael24@example.net	+botLrQX3d
+49	johnsonbeverly@example.net	(&_DVMxs60
+50	sellersjeffery@example.net	@eF%O@Lc@2
+\.
+
+
+--
+-- TOC entry 3362 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dedrobin
+--
+
+SELECT pg_catalog.setval('public.address_id_seq', 50, true);
+
+
+--
+-- TOC entry 3363 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dedrobin
+--
+
+SELECT pg_catalog.setval('public.product_id_seq', 51, true);
+
+
+--
+-- TOC entry 3364 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: profile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dedrobin
+--
+
+SELECT pg_catalog.setval('public.profile_id_seq', 50, true);
+
+
+--
+-- TOC entry 3365 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: purchase_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dedrobin
+--
+
+SELECT pg_catalog.setval('public.purchase_id_seq', 50, true);
+
+
+--
+-- TOC entry 3366 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dedrobin
+--
+
+SELECT pg_catalog.setval('public.user_id_seq', 50, true);
+
+
+--
+-- TOC entry 3196 (class 2606 OID 16708)
+-- Name: address address_pkey; Type: CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.address
+    ADD CONSTRAINT address_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3192 (class 2606 OID 16685)
+-- Name: product product_pkey; Type: CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.product
+    ADD CONSTRAINT product_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3194 (class 2606 OID 16694)
+-- Name: profile profile_pkey; Type: CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3198 (class 2606 OID 16720)
+-- Name: purchase purchase_pkey; Type: CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.purchase
+    ADD CONSTRAINT purchase_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3190 (class 2606 OID 16676)
+-- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3200 (class 2606 OID 16709)
+-- Name: address address_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.address
+    ADD CONSTRAINT address_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(id);
+
+
+--
+-- TOC entry 3199 (class 2606 OID 16695)
+-- Name: profile profile_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(id);
+
+
+--
+-- TOC entry 3202 (class 2606 OID 16726)
+-- Name: purchase purchase_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.purchase
+    ADD CONSTRAINT purchase_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.product(id);
+
+
+--
+-- TOC entry 3201 (class 2606 OID 16721)
+-- Name: purchase purchase_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dedrobin
+--
+
+ALTER TABLE ONLY public.purchase
+    ADD CONSTRAINT purchase_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(id);
+
+
+-- Completed on 2022-07-03 23:19:12
+
+--
+-- PostgreSQL database dump complete
+--
+
