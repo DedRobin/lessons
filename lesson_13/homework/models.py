@@ -16,6 +16,8 @@ class User(Base):
     addresses = relationship("Address", back_populates="user")  # link from table <-- "Address"
     purchases = relationship("Purchase", back_populates="user")  # link from table <-- "Purchase"
 
+    def __repr__(self):
+        return f"{self.id}, {self.email}, {self.password}"
 
 class Profile(Base):
     __tablename__ = "profile"

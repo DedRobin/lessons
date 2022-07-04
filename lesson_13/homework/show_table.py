@@ -125,8 +125,12 @@ if __name__ == '__main__':
     # show_table(test_profile)
 
     print("Purchase")
-    test_purchase = test_session.query(Purchase)
+    test_purchase = test_session.query(Purchase).all()
     show_table(test_purchase)
+
+    test_user = test_session.query(User).all()
+    for x in test_user:
+        print(x)
     #
     # print("Address")
     # test_address = test_session.query(Address)
