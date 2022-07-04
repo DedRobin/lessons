@@ -13,4 +13,4 @@ def find_all_users_who_bought_definite_product(session: Session, product_name: s
 
 if __name__ == '__main__':
     test_session = create_current_session()
-    find_all_users_who_bought_definite_product(test_session, "concern")
+    find_all_users_who_bought_definite_product(test_session, "play")
