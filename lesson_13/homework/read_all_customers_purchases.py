@@ -5,7 +5,8 @@ from show_table import show_table
 
 
 def read_all_customers_purchases(session: Session) -> None:
-    current_purchases = session.query(Purchase).filter_by().all()
+    current_purchases = session.query(Purchase).filter_by()
+    a = current_purchases[0].__tablename__
     show_table(session, current_purchases)
 
 
