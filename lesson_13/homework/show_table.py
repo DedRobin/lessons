@@ -50,57 +50,44 @@ def render_table(fields: list, all_columns: list):
 
 def show_table(model_object: list) -> None:
     session = create_current_session()
-    LENGHT_COLUMN = 60
     fields = []
 
     if isinstance(model_object[0], User):
         all_columns = [column.name for column in inspect(User).c]
-        print(("|" + "-" * LENGHT_COLUMN) * len(all_columns) + "|")
-        string = "|" + ("{:^" + str(LENGHT_COLUMN) + "}|") * len(all_columns)
-        print(string.format(*all_columns))
-        print(("|" + "-" * LENGHT_COLUMN) * len(all_columns) + "|")
         for current_user in model_object:
             fields.append([current_user.id,
                            current_user.email,
                            current_user.password])
+        render_table(fields=fields, all_columns=all_columns)
 
     elif isinstance(model_object[0], Profile):
         all_columns = [column.name for column in inspect(Profile).c]
-        print(("|" + "-" * LENGHT_COLUMN) * len(all_columns) + "|")
-        string = "|" + ("{:^" + str(LENGHT_COLUMN) + "}|") * len(all_columns)
-        print(string.format(*all_columns))
-        print(("|" + "-" * LENGHT_COLUMN) * len(all_columns) + "|")
         for current_profile in model_object:
             fields.append([current_profile.id,
                            current_profile.name,
                            current_profile.phone,
                            current_profile.age,
                            current_profile.user.id])
+        render_table(fields=fields, all_columns=all_columns)
 
     elif isinstance(model_object[0], Address):
         all_columns = [column.name for column in inspect(Address).c]
-        print(("|" + "-" * LENGHT_COLUMN) * len(all_columns) + "|")
-        string = "|" + ("{:^" + str(LENGHT_COLUMN) + "}|") * len(all_columns)
-        print(string.format(*all_columns))
-        print(("|" + "-" * LENGHT_COLUMN) * len(all_columns) + "|")
         for current_address in model_object:
             fields.append([current_address.id,
                            current_address.city,
                            current_address.address.replace("\n", " "),
                            current_address.user.id])
+        render_table(fields=fields, all_columns=all_columns)
 
     elif isinstance(model_object[0], Product):
         all_columns = [column.name for column in inspect(Product).c]
-        print(("|" + "-" * LENGHT_COLUMN) * len(all_columns) + "|")
-        string = "|" + ("{:^" + str(LENGHT_COLUMN) + "}|") * len(all_columns)
-        print(string.format(*all_columns))
-        print(("|" + "-" * LENGHT_COLUMN) * len(all_columns) + "|")
         for current_product in model_object:
             fields.append([current_product.id,
                            current_product.product_name,
                            current_product.price,
                            current_product.product_quantity,
                            current_product.comment])
+        render_table(fields=fields, all_columns=all_columns)
 
     elif isinstance(model_object[0], Purchase):
         all_columns = [column.name for column in inspect(Purchase).c]
@@ -115,22 +102,22 @@ def show_table(model_object: list) -> None:
 if __name__ == '__main__':
     test_session = create_current_session()
 
-    # print("User")
-    # test_user = test_session.query(User)
-    # show_table(test_user)
-    #
-    # print("Product")
-    # test_model = test_session.query(Product)
-    # show_table(test_model)
-    #
-    # print("Profile")
-    # test_profile = test_session.query(Profile)
-    # show_table(test_profile)
+    print("User")
+    test_user = test_session.query(User)
+    show_table(test_user)
+
+    print("Product")
+    test_model = test_session.query(Product)
+    show_table(test_model)
+
+    print("Profile")
+    test_profile = test_session.query(Profile)
+    show_table(test_profile)
 
     print("Purchase")
     test_purchase = test_session.query(Purchase).all()
     show_table(test_purchase)
 
-    # print("Address")
-    # test_address = test_session.query(Address)
-    # show_table(test_address)
+    print("Address")
+    test_address = test_session.query(Address)
+    show_table(test_address)
