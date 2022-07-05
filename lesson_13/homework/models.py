@@ -32,6 +32,8 @@ class Profile(Base):
     # links to tables
     user = relationship("User", back_populates="profile")  # link to table --> "User"
 
+    def __repr__(self):
+        return f"{self.id}, {self.name}, {self.phone}, {self.age}"
 
 class Address(Base):
     __tablename__ = "address"
@@ -45,6 +47,9 @@ class Address(Base):
     # links ro tables
     user = relationship("User", back_populates="addresses")  # link to table --> "User"
 
+    def __repr__(self):
+        return f"{self.id}, {self.city}, {self.address}"
+
 
 class Product(Base):
     __tablename__ = "product"
@@ -56,6 +61,9 @@ class Product(Base):
 
     # links from tables
     purchases = relationship("Purchase", back_populates="product")  # link from table --> "Purchase"
+
+    def __repr__(self):
+        return f"{self.id}, {self.product_name}, {self.price}, {self.product_quantity}, {self.comment}"
 
 
 class Purchase(Base):
@@ -70,3 +78,7 @@ class Purchase(Base):
     # links to tables
     user = relationship("User", back_populates="purchases")  # link to table --> "User"
     product = relationship("Product", back_populates="purchases")  # link to table --> "Product"
+
+    def __repr__(self):
+        return f"{self.id}, {self.purchase_quantity}"
+

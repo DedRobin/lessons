@@ -12,6 +12,42 @@ def _max_lenght_charachters_in_each_column(fields: list, column_names: list) -> 
     return highs
 
 
+def render_table(fields: list, all_columns: list):
+    highs = _max_lenght_charachters_in_each_column(fields, all_columns)
+
+    # TOP LINE
+    header = ["|"]
+    for index_of_column in range(len(all_columns)):
+        header.append(("-" * highs[index_of_column]) + "|")
+    header = "".join(header)
+    print(header)
+
+    # NAME OF COLUMNS
+    name_of_columns = ["|"]
+    for index_of_column in range(len(all_columns)):
+        name_of_columns.append(("{:^" + str(highs[index_of_column]) + "}|"))
+    name_of_columns = "".join(name_of_columns)
+    print(name_of_columns.format(*all_columns))
+
+    # MIDDLE LINE
+    print(header)
+
+    # DATA
+    for field in fields:
+        content = ["|"]
+        for index_of_column in range(len(all_columns)):
+            content.append(("{:^" + str(highs[index_of_column]) + "}|"))
+        content = "".join(content)
+        print(content.format(*field))
+
+    # BOT LINE
+
+    bot = ["|"]
+    for index_of_column in range(len(all_columns)):
+        bot.append(("-" * highs[index_of_column]) + "|")
+    print("".join(bot))
+
+
 def show_table(model_object: list) -> None:
     session = create_current_session()
     LENGHT_COLUMN = 60
@@ -73,40 +109,7 @@ def show_table(model_object: list) -> None:
                            current_purchase.purchase_quantity,
                            current_purchase.user.id,
                            current_purchase.product.id])
-
-        hihgs = _max_lenght_charachters_in_each_column(fields, all_columns)
-
-        # TOP LINE
-        header = ["|"]
-        for index_of_column in range(len(all_columns)):
-            header.append(("-" * hihgs[index_of_column]) + "|")
-        header = "".join(header)
-        print(header)
-
-        # NAME OF COLUMNS
-        name_of_columns = ["|"]
-        for index_of_column in range(len(all_columns)):
-            name_of_columns.append(("{:^" + str(hihgs[index_of_column]) + "}|"))
-        name_of_columns = "".join(name_of_columns)
-        print(name_of_columns.format(*all_columns))
-
-        # MIDDLE LINE
-        print(header)
-
-        # DATA
-        for field in fields:
-            content = ["|"]
-            for index_of_column in range(len(all_columns)):
-                content.append(("{:^" + str(hihgs[index_of_column]) + "}|"))
-            content = "".join(content)
-            print(content.format(*field))
-
-    # BOT LINE
-
-    bot = ["|"]
-    for index_of_column in range(len(all_columns)):
-        bot.append(("-" * hihgs[index_of_column]) + "|")
-    print("".join(bot))
+        render_table(fields=fields, all_columns=all_columns)
 
 
 if __name__ == '__main__':
@@ -128,10 +131,6 @@ if __name__ == '__main__':
     test_purchase = test_session.query(Purchase).all()
     show_table(test_purchase)
 
-    test_user = test_session.query(User).all()
-    for x in test_user:
-        print(x)
-    #
     # print("Address")
     # test_address = test_session.query(Address)
     # show_table(test_address)
