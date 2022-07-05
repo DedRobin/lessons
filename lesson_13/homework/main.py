@@ -16,6 +16,7 @@ def main():
     while run:
         print("""Menu:
     1) Products;
+    2) Users;
     2) Purchases;
     3) Exit.""")
 
@@ -34,7 +35,7 @@ def main():
     1) Create product;
     2) Read product data;
     3) Update product;
-    4) Remove product;
+    4) Delete product;
     5) <-- Come back.""")
                     try:
                         selection_for_1 = int(input("Selection: "))

@@ -1,7 +1,8 @@
 from re import match
-from models import Product, Purchase, User
 from sqlalchemy.orm import Session
+
 from create_session import create_current_session
+from models import Product, Purchase, User, Profile
 
 
 def __enter_or_create_user(session: Session) -> User:
@@ -15,10 +16,12 @@ def __enter_or_create_user(session: Session) -> User:
         else:
             run_2 = True
             while run_2:
-                current_user = session.query(User).filter_by(user_name=input_user).first()
+                current_user = session.query(User).join(Profile).filter(Profile.name == input_user).first()  # !!!
                 if not current_user:
-                    add_user = User(user_name=input_user)
-                    session.add(add_user)
+                    input_email
+                    user = User(user_name=input_user)
+                    profile = Profile(user=user, )
+                    session.add(user)
                     session.commit()
                     continue
                 else:

@@ -1,6 +1,7 @@
-from create_tables import create_current_session
 from faker import Faker
 from sqlalchemy.orm import Session
+
+from create_session import create_current_session
 from models import User, Profile, Address, Product
 
 
