@@ -1,24 +1,41 @@
 from re import match
 
 from lesson_13.homework.create_session import create_current_session
-from lesson_13.homework.models import Product
+from lesson_13.homework.models import User, Profile, Address
 
 
 def create_user() -> None:
     session = create_current_session()
-    row = input("Enter data separated by commas by pattern:\n', price, quantity, comment'\n")
-    check = match(r"\w+ \w+", row)
-    if check:
-        columns = ("product_name", "price", "product_quantity", "comment")
 
-        data = {key: value for key, value in zip(columns, row)}
-        current_product = Product(**data)
+    # USER
+    email = input("Enter email -> ")
+    password = input("Enter password -> ")
+    new_user = User(email=email, password=password)
 
-        session.add(current_product)
-        session.commit()
-    else:
-        print("Incorrect data.")
+    # PROFILE
+    name = input("Enter name -> ")
+    phone = input("Enter phone -> ")
+    while True:
+        try:
+            age = int(input("Enter age -> "))
+        except ValueError:
+            print("Error! Enter integer!")
+        else:
+            break
+
+    new_profile = Profile(user=new_user, name=name, phone=phone, age=age)
+
+    # ADDRESS
+    city = input("Enter city -> ")
+    address = input("Enter address -> ")
+    new_address = Address(user=new_user, city=city, address=address)
+
+    data = (new_user, new_profile, new_address)
+
+    # COMMIT
+    session.add_all(data)
+    session.commit()
 
 
 if __name__ == '__main__':
-    create_product()
+    create_user()

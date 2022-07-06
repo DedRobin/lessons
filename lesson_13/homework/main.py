@@ -4,6 +4,8 @@ from lesson_13.homework.product.create_product import create_product
 from lesson_13.homework.product.read_product import read_product
 from lesson_13.homework.product.update_product import update_product
 from lesson_13.homework.product.delete_product import delete_product
+from lesson_13.homework.user.create_user import create_user
+from lesson_13.homework.user.delete_user import delete_user
 from buy_products import buy_product
 from read_all_customers_purchases import read_all_customers_purchases
 
@@ -90,7 +92,7 @@ def main():
 
                         # CREATE USER
                         if selection_for_2 == 1:
-                            pass
+                            create_user()
 
                         # READ USERS
                         elif selection_for_2 == 2:
@@ -107,7 +109,7 @@ def main():
 
                         # DELETE USER
                         elif selection_for_2 == 4:
-                            delete_product()
+                            delete_user()
 
                         # COME BACK
                         elif selection_for_2 == 5:

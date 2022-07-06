@@ -1,18 +1,26 @@
 from lesson_13.homework.create_session import create_current_session
-from lesson_13.homework.models import Product
+from lesson_13.homework.models import User, Address, Profile
 
 
-def delete_product() -> None:
-    try:
-        id_number = int(input("Enter id for delete product:"))
-    except ValueError:
-        print(f"Incorrect input.")
-    else:
-        pass
+def delete_user() -> None:
     session = create_current_session()
-    session.query(Product).filter_by(id=id_number).delete()
-    session.commit()
+    while True:
+        try:
+            id_number = int(input("Enter ID for delete User -> "))
+        except ValueError:
+            print(f"Incorrect input.")
+        else:
+            check_id = session.query(User).filter_by(id=id_number).all()
+            if check_id:
+                session.query(Address).filter_by(user_id=id_number).delete()
+                session.query(Profile).filter_by(user_id=id_number).delete()
+                session.query(User).filter_by(id=id_number).delete()
+                session.commit()
+                return
+            else:
+                print("ID is not find.")
+                continue
 
 
 if __name__ == '__main__':
-    delete_product()
+    delete_user()
