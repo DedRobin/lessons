@@ -1,8 +1,9 @@
 from lesson_13.homework.create_session import create_current_session
 
-from product.create_product import create_product
-from product.read_product import read_product
-from product.delete_product import delete_product
+from lesson_13.homework.product.create_product import create_product
+from lesson_13.homework.product.read_product import read_product
+from lesson_13.homework.product.update_product import update_product
+from lesson_13.homework.product.delete_product import delete_product
 from buy_products import buy_product
 from read_all_customers_purchases import read_all_customers_purchases
 
@@ -49,11 +50,11 @@ def main():
 
                         # READ PRODUCT
                         elif selection_for_1 == 2:
-                            read_product(session=current_session)
+                            read_product()
 
                         # UPDATE PRODUCT
                         elif selection_for_1 == 3:
-                            pass
+                            update_product()
 
                         # DELETE PRODUCT
                         elif selection_for_1 == 4:
@@ -75,7 +76,7 @@ def main():
                 run_for_2 = True
 
                 while run_for_2:
-                    print("""Menu -> User:
+                    print("""Menu -> Users:
     1) Create user;
     2) Read users;
     3) Update user;

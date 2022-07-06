@@ -8,5 +8,8 @@ def function():
 
 if __name__ == '__main__':
     test_session = create_current_session()
-    table = test_session.query(User, Purchase).join(Purchase).all()
+    result = test_session.query(User).first()
+    result = result.
+    for x in result:
+        print(x)
     pass
