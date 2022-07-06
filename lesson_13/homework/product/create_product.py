@@ -1,8 +1,7 @@
 from re import match
-from sqlalchemy.orm import Session
 
-from create_session import create_current_session
-from models import Product
+from lesson_13.homework.create_session import create_current_session
+from lesson_13.homework.models import Product
 
 
 def create_product() -> None:

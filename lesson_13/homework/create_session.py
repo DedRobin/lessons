@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import Session
-from models import Base
-from utils import create_db_engine, create_db_engine_if_not_exists
+from lesson_13.homework.models import Base
+from lesson_13.homework.utils import create_db_engine, create_db_engine_if_not_exists
 
 
 def create_current_session() -> Session:

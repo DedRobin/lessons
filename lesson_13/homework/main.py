@@ -1,9 +1,8 @@
-from create_session import create_current_session
+from lesson_13.homework.create_session import create_current_session
 
-from create_product import create_product
-from read_product import read_product
-from delete_product import delete_product
-from update_product import update_product
+from product.create_product import create_product
+from product.read_product import read_product
+from product.delete_product import delete_product
 from buy_products import buy_product
 from read_all_customers_purchases import read_all_customers_purchases
 
@@ -58,7 +57,7 @@ def main():
 
                         # DELETE PRODUCT
                         elif selection_for_1 == 4:
-                            pass
+                            delete_product()
 
                         # COME BACK
                         elif selection_for_1 == 5:
@@ -107,12 +106,7 @@ def main():
 
                         # DELETE USER
                         elif selection_for_2 == 4:
-                            try:
-                                id_number_4 = int(input("Enter id:"))
-                            except ValueError:
-                                print(f"Incorrect input.")
-                            else:
-                                pass
+                            delete_product()
 
                         # COME BACK
                         elif selection_for_2 == 5:

@@ -1,7 +1,6 @@
-from create_session import create_current_session
+from lesson_13.homework.create_session import create_current_session
 from models import User, Purchase, Product, Profile
 from sqlalchemy.orm import Session
-from sqlalchemy.sql import or_, and_
 
 
 def find_all_products_which_bought_definite_user(session: Session, name: str) -> None:

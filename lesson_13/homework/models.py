@@ -19,6 +19,7 @@ class User(Base):
     # def __repr__(self):
     #     return f"{self.id}, {self.email}, {self.password}"
 
+
 class Profile(Base):
     __tablename__ = "profile"
     id = Column(Integer, primary_key=True)
@@ -34,6 +35,7 @@ class Profile(Base):
 
     # def __repr__(self):
     #     return f"{self.id}, {self.name}, {self.phone}, {self.age}"
+
 
 class Address(Base):
     __tablename__ = "address"
@@ -81,4 +83,3 @@ class Purchase(Base):
 
     # def __repr__(self):
     #     return f"{self.id}, {self.purchase_quantity}"
-
