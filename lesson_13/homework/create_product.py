@@ -5,7 +5,8 @@ from create_session import create_current_session
 from models import Product
 
 
-def add_product(session: Session) -> None:
+def create_product() -> None:
+    session = create_current_session()
     row = input("Enter data separated by commas by pattern:\n'product name, price, quantity, comment'\n")
     check = match(r"[\d\w ]+, ?\d+(\.\d+)?, ?\d+, ?[\d\w ]+", row)
     if check:
@@ -27,5 +28,4 @@ def add_product(session: Session) -> None:
 
 
 if __name__ == '__main__':
-    test_session = create_current_session()
-    add_product(test_session)
+    create_product()

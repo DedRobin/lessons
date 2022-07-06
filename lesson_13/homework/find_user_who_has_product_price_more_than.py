@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 
 def find_user_who_has_product_price_more_than(session: Session, price: int) -> None:
-    users = session.query(User).join(Purchase).join(Product).filter(Product.price > price).all()
+    users = session.query(User, Purchase.purchase_quantity).join(Purchase).join(Product).filter(Product.price > price)
     for user in users:
         user_id = user.id
         email = user.email

@@ -1,8 +1,8 @@
 from create_session import create_current_session
 
-from add_product import add_product
+from create_product import create_product
 from read_product import read_product
-from remove_product import remove_product
+from delete_product import delete_product
 from update_product import update_product
 from buy_products import buy_product
 from read_all_customers_purchases import read_all_customers_purchases
@@ -17,14 +17,15 @@ def main():
         print("""Menu:
     1) Products;
     2) Users;
-    2) Purchases;
-    3) Exit.""")
+    3) Purchases;
+    4) Exit.""")
 
         try:
             selection = int(input("Selection: "))
         except ValueError:
             print("Incorrect input.")
         else:
+
             # PRODUCTS
             if selection == 1:
 
@@ -45,7 +46,7 @@ def main():
 
                         # CREATE PRODUCT
                         if selection_for_1 == 1:
-                            add_product(session=current_session)
+                            create_product()
 
                         # READ PRODUCT
                         elif selection_for_1 == 2:
@@ -53,22 +54,11 @@ def main():
 
                         # UPDATE PRODUCT
                         elif selection_for_1 == 3:
-                            try:
-                                id_number_3 = int(input("Enter id:"))
-                            except ValueError:
-                                print(f"Incorrect input.")
-                            else:
-                                update_product(session=current_session, id_number=id_number_3)
+                            pass
 
-                        # REMOVE PRODUCT
+                        # DELETE PRODUCT
                         elif selection_for_1 == 4:
-                            try:
-                                id_number_4 = int(input("Enter id:"))
-                            except ValueError:
-                                print(f"Incorrect input.")
-                            else:
-                                remove_product(session=current_session, id_number=id_number_4)
-                                print(f"Row by id = {id_number_4} is removed.")
+                            pass
 
                         # COME BACK
                         elif selection_for_1 == 5:
@@ -78,44 +68,100 @@ def main():
                         else:
                             print(f"Incorrect selection -> '{selection_for_1}'.")
 
-            # PURCHASES
+
+            # ------------------------------
+            # USER
             elif selection == 2:
 
                 run_for_2 = True
 
                 while run_for_2:
+                    print("""Menu -> User:
+    1) Create user;
+    2) Read users;
+    3) Update user;
+    4) Delete user;
+    5) <-- Come back.""")
+                    try:
+                        selection_for_2 = int(input("Selection: "))
+                    except ValueError:
+                        print(f"Incorrect input.")
+                    else:
+
+                        # CREATE USER
+                        if selection_for_2 == 1:
+                            pass
+
+                        # READ USERS
+                        elif selection_for_2 == 2:
+                            pass
+
+                        # UPDATE USER
+                        elif selection_for_2 == 3:
+                            try:
+                                id_number_3 = int(input("Enter id:"))
+                            except ValueError:
+                                print(f"Incorrect input.")
+                            else:
+                                pass
+
+                        # DELETE USER
+                        elif selection_for_2 == 4:
+                            try:
+                                id_number_4 = int(input("Enter id:"))
+                            except ValueError:
+                                print(f"Incorrect input.")
+                            else:
+                                pass
+
+                        # COME BACK
+                        elif selection_for_2 == 5:
+                            run_for_2 = False
+
+                        # INCORRECT INPUT
+                        else:
+                            print(f"Incorrect selection -> '{selection_for_2}'.")
+
+
+
+            # PURCHASES
+            elif selection == 3:
+
+                run_for_3 = True
+
+                while run_for_3:
                     print("""Menu -> Purchases:
     1) Buy product;
     2) Show all customer's purchases;
     3) Filter purchases(Not work);
-    4) Come back.""")
+    4) <-- Come back.""")
                     try:
-                        selection_for_2 = int(input("Selection: "))
+                        selection_for_3 = int(input("Selection: "))
                     except ValueError:
                         print("Incorrect input.")
                     else:
 
                         # BUY PRODUCT
-                        if selection_for_2 == 1:
+                        if selection_for_3 == 1:
                             buy_product(session=current_session)
 
                         # SHOW
-                        elif selection_for_2 == 2:
+                        elif selection_for_3 == 2:
                             read_all_customers_purchases(session=current_session)
 
                         # FILTER
-                        elif selection_for_2 == 3:
+                        elif selection_for_3 == 3:
                             pass
 
                         # COME BACK
-                        elif selection_for_2 == 4:
-                            run_for_2 = False
+                        elif selection_for_3 == 4:
+                            run_for_3 = False
 
                         else:
-                            print(f"Incorrect selection -> '{selection_for_2}'.")
+                            print(f"Incorrect selection -> '{selection_for_3}'.")
 
             # EXIT
-            elif selection == 3:
+            elif selection == 4:
                 run = False
 
             else:
