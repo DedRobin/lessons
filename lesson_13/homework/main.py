@@ -5,7 +5,9 @@ from lesson_13.homework.product.read_product import read_product
 from lesson_13.homework.product.update_product import update_product
 from lesson_13.homework.product.delete_product import delete_product
 from lesson_13.homework.user.create_user import create_user
+from lesson_13.homework.user.read_users import read_users
 from lesson_13.homework.user.delete_user import delete_user
+
 from buy_products import buy_product
 from read_all_customers_purchases import read_all_customers_purchases
 
@@ -96,7 +98,7 @@ def main():
 
                         # READ USERS
                         elif selection_for_2 == 2:
-                            pass
+                            read_users()
 
                         # UPDATE USER
                         elif selection_for_2 == 3:
