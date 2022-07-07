@@ -6,7 +6,7 @@ def delete_user() -> None:
     session = create_current_session()
     while True:
         try:
-            id_number = int(input("Enter ID for delete User -> "))
+            id_number = int(input("Enter user ID which you want to remove it -> "))
         except ValueError:
             print(f"Incorrect input.")
         else:
