@@ -1,4 +1,4 @@
-import maskpass
+from getpass import getpass
 
 from lesson_13.homework.create_session import create_current_session
 from lesson_13.homework.models import User, Profile, Address
@@ -7,9 +7,9 @@ from lesson_13.homework.models import User, Profile, Address
 def update_user() -> None:
     session = create_current_session()
 
-    buffer = {}  # buffer
+    buffer = {}  # buffer for changes in user
 
-    # FILTER
+    # FILTERS
     filter_for_user = {}
     filter_for_profile = {}
     filter_for_address = {}
@@ -18,7 +18,7 @@ def update_user() -> None:
         user_id = int(input("Enter user ID -> "))
 
     except ValueError:
-        print("Incorrect input!")
+        print("Incorrect input! Going back.")
     else:
         current_user = session.query(User).filter_by(id=user_id)
         current_profile = session.query(Profile).filter_by(user_id=user_id)
@@ -52,7 +52,7 @@ What column do you want to change?
 
                 # ADDRESS
                 if selection == 1:
-                    previous_address = current_address.first().address
+                    previous_address = current_address.first().address.replace("\n", " ")
                     new_address = input(f"Enter new address (current age = {previous_address}) -> ")
                     filter_for_address["address"] = new_address
                     buffer["Address"] = f"{previous_address} -> {previous_address}"
@@ -67,7 +67,7 @@ What column do you want to change?
                 # CITY
                 elif selection == 3:
                     previous_city = current_address.first().city
-                    new_city = int(input(f"Enter new city (current city = {previous_city}) -> "))
+                    new_city = input(f"Enter new city (current city = {previous_city}) -> ")
                     filter_for_address["city"] = new_city
                     buffer["City"] = f"{previous_city} -> {new_city}"
 
@@ -89,17 +89,16 @@ What column do you want to change?
                 # PASSWORD
                 elif selection == 6:
                     while True:
-                        previous_password = input("Enter old password (enter 'q' for cancel) -> ")
+                        previous_password = getpass(prompt="Enter old password (enter 'q' for cancel input) -> ")
                         if previous_password == current_user.first().password:
-                            new_password = input("Enter new password -> ")
+                            new_password = getpass(prompt="Enter new password -> ")
                             filter_for_user["password"] = new_password
-                            buffer[f"{len(previous_password) * '*'}"] = new_password
                             buffer["Password"] = f"{len(previous_password) * '*'} -> {len(new_password) * '*'}"
                             break
                         elif previous_password == "q":
                             break
                         else:
-                            print("Old and entered password are not match! ")
+                            print("Old and entered password aren't match! ")
 
                 # PHONE
                 elif selection == 7:
@@ -110,17 +109,20 @@ What column do you want to change?
 
                 # SAVE
                 elif selection == 8:
-                    answer = input("Are you sure you want to apply changes?(y/n)")
-                    if answer == "y":
-                        if filter_for_address:
-                            current_address.update(filter_for_address)
-                        if filter_for_profile:
-                            current_profile.update(filter_for_profile)
-                        if filter_for_user:
-                            current_user.update(filter_for_user)
-                        session.commit()
-                        print("Changes applied.")
-                        return
+                    if buffer:
+                        answer = input("Are you sure you want to apply changes?(y/n)")
+                        if answer == "y":
+                            if filter_for_address:
+                                current_address.update(filter_for_address)
+                            if filter_for_profile:
+                                current_profile.update(filter_for_profile)
+                            if filter_for_user:
+                                current_user.update(filter_for_user)
+                            session.commit()
+                            buffer = {}
+                            print("Changes applied.")
+                    else:
+                        print("No changes.")
 
                 # COME BACK
                 elif selection == 9:
@@ -132,5 +134,3 @@ What column do you want to change?
 
 if __name__ == '__main__':
     update_user()
-    # session = create_current_session()
-    # session.query(Address).filter_by(city="Brest").first().update({"city": "Brest1"})
