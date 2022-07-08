@@ -1,9 +1,10 @@
+from sqlalchemy.orm import Session
+
 from lesson_13.homework.create_session import create_current_session
 from lesson_13.homework.models import User, Address, Profile
 
 
-def delete_user() -> None:
-    session = create_current_session()
+def delete_user(session: Session) -> None:
     while True:
         try:
             id_number = int(input("Enter user ID which you want to remove it -> "))
@@ -23,4 +24,5 @@ def delete_user() -> None:
 
 
 if __name__ == '__main__':
-    delete_user()
+    test_session = create_current_session()
+    delete_user(test_session)

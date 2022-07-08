@@ -1,10 +1,11 @@
 from sqlalchemy import inspect
+from sqlalchemy.orm import Session
 
 from lesson_13.homework.models import *
 from lesson_13.homework.create_session import create_current_session
 
 
-def read_product() -> None:
+def read_product(session: Session) -> None:
     session = create_current_session()
     products = session.query(Product)
 
@@ -15,4 +16,5 @@ def read_product() -> None:
         print(values)
 
 if __name__ == '__main__':
-    read_product()
+    test_session = create_current_session()
+    read_product(test_session)

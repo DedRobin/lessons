@@ -1,10 +1,10 @@
+from sqlalchemy.orm import Session
+
 from lesson_13.homework.create_session import create_current_session
 from lesson_13.homework.models import Product
 
 
-def update_product() -> None:
-    session = create_current_session()
-
+def update_product(session: Session) -> None:
     run = True
     key = ""
 
@@ -74,4 +74,5 @@ What column do you want to change?
 
 
 if __name__ == '__main__':
-    update_product()
+    test_session = create_current_session()
+    update_product(test_session)

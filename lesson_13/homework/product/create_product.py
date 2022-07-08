@@ -1,11 +1,11 @@
 from re import match
+from sqlalchemy.orm import Session
 
 from lesson_13.homework.create_session import create_current_session
 from lesson_13.homework.models import Product
 
 
-def create_product() -> None:
-    session = create_current_session()
+def create_product(session: Session) -> None:
     product_data = input("Enter data separated by commas by pattern:\n'product name, price, quantity, comment'\n")
     check = match(r"[\d\w ]+, ?\d+(\.\d+)?, ?\d+, ?[\d\w ]+", product_data)
     if check:
@@ -27,4 +27,5 @@ def create_product() -> None:
 
 
 if __name__ == '__main__':
-    create_product()
+    test_session = create_current_session()
+    create_product(test_session)

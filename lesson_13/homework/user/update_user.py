@@ -1,12 +1,11 @@
 from getpass import getpass
+from sqlalchemy.orm import Session
 
 from lesson_13.homework.create_session import create_current_session
 from lesson_13.homework.models import User, Profile, Address
 
 
-def update_user() -> None:
-    session = create_current_session()
-
+def update_user(session: Session) -> None:
     buffer = {}  # buffer for changes in user
 
     # FILTERS
@@ -133,4 +132,5 @@ What column do you want to change?
 
 
 if __name__ == '__main__':
-    update_user()
+    test_session = create_current_session()
+    update_user(test_session)

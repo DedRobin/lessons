@@ -1,11 +1,11 @@
 from re import match
+from sqlalchemy.orm import Session
 
 from lesson_13.homework.create_session import create_current_session
 from lesson_13.homework.models import User, Profile, Address
 
 
-def create_user() -> None:
-    session = create_current_session()
+def create_user(session: Session) -> None:
 
     # USER
     email = input("Enter email -> ")
@@ -38,4 +38,5 @@ def create_user() -> None:
 
 
 if __name__ == '__main__':
-    create_user()
+    test_session = create_current_session()
+    create_user(test_session)
