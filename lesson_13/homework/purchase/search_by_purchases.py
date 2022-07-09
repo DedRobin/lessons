@@ -36,16 +36,16 @@ Choice condition operator -> """))
 
 
 def _filter_by_column(purchase: Purchase) -> dict:
-    all_columns = {"User name": purchase.user.profile[0].name,
-                   "User email": purchase.user.email,
-                   "User phone": purchase.user.profile[0].phone,
-                   "User age": purchase.user.profile[0].age,
-                   "User city": purchase.user.addresses[0].city,
-                   "User address": purchase.user.addresses[0].address.replace("\n", " "),
-                   "Product name": purchase.product.product_name,
-                   "Product price": purchase.product.price,
-                   "Product comment": purchase.product.price,
-                   "Purchase quantity": purchase.purchase_quantity}
+    all_columns = {"User name": lambda x: x.user.profile[0].name,
+                   "User email": lambda x: x.email,
+                   "User phone": lambda x: x.profile[0].phone,
+                   "User age": lambda x: x.profile[0].age,
+                   "User city": lambda x: x.addresses[0].city,
+                   "User address": lambda x: x.addresses[0].address.replace("\n", " "),
+                   "Product name": lambda x: x.product_name,
+                   "Product price": lambda x: x.price,
+                   "Product comment": lambda x: x.price,
+                   "Purchase quantity": lambda x: x.purchase_quantity}
 
     filter_columns = {}
     current_filter = filter_columns
@@ -78,43 +78,43 @@ def _filter_by_column(purchase: Purchase) -> dict:
 
             # USER NAME
             if selection == 1:
-                filter_columns["User name"] = purchase.user.profile[0].name
+                filter_columns["User name"] = lambda x: x.profile[0].name
 
             # USER EMAIL
             elif selection == 2:
-                filter_columns["User email"] = purchase.user.email
+                filter_columns["User email"] = lambda x: x.user.email
 
             # USER PHONE
             elif selection == 3:
-                filter_columns["User phone"] = purchase.user.profile[0].phone
+                filter_columns["User phone"] = lambda x: x.user.profile[0].phone
 
             # USER AGE
             elif selection == 4:
-                filter_columns["User age"] = purchase.user.profile[0].age
+                filter_columns["User age"] = lambda x: x.user.profile[0].age
 
             # USER CITY
             elif selection == 5:
-                filter_columns["User city"] = purchase.user.addresses[0].city
+                filter_columns["User city"] = lambda x: x.user.addresses[0].city
 
             # USER ADDRESS
             elif selection == 6:
-                filter_columns["User address"] = purchase.user.addresses[0].address.replace("\n", " ")
+                filter_columns["User address"] = lambda x: x.user.addresses[0].address.replace("\n", " ")
 
             # PRODUCT NAME
             elif selection == 7:
-                filter_columns["Product name"] = purchase.product.product_name
+                filter_columns["Product name"] = lambda x: x.product.product_name
 
             # PRODUCT PRICE
             elif selection == 8:
-                filter_columns["Product price"] = purchase.product.price
+                filter_columns["Product price"] = lambda x: x.product.price
 
             # PRODUCT COMMENT
             elif selection == 9:
-                filter_columns["Product comment"] = purchase.product.price
+                filter_columns["Product comment"] = lambda x: x.product.price
 
             # PURCHASE QUANTITY
             elif selection == 10:
-                filter_columns["Purchase quantity"] = purchase.purchase_quantity
+                filter_columns["Purchase quantity"] = lambda x: x.purchase_quantity
 
             # ADD ALL
             elif selection == 11:

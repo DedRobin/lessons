@@ -1,18 +1,17 @@
 from sqlalchemy.orm import Query
 
+from lesson_13.homework.models import Purchase
 
-def rendering(query: Query, dictionary: dict) -> None:
 
+def rendering(purchases: Query, dictionary: dict[str: Purchase]) -> None:
+    some_func = dictionary["User name"]
+    print(some_func(purchases[1]))
     table_header = dictionary.keys()
-    table_data = dictionary.values()
 
-    max_lengths = [max(len(str(key)), len(str(value))) + 2 for key, value in dictionary.items()]
-    template = []
+    """
     for length in max_lengths:
         template.append("{:^" + f"{length}" + "}")
     template = "|".join(template)
-    print(template.format(*table_header))
-    for purchase in query:
-        print(template.format(*table_data))
+    """
 
 
