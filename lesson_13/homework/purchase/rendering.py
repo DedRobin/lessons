@@ -1,19 +1,23 @@
-import numpy as np
+
 from sqlalchemy.orm import Query
 
 
 def rendering(purchases: Query, dictionary: dict) -> None:
-    column_names = np.array(list(dictionary.keys()))
+    column_names = list(dictionary.keys())
     data = []
     for purchase in purchases:
         row = [upload(purchase) for upload in dictionary.values()]
         data.append(row)
 
-    data_as_np_array = np.array(data)
+    selection = int(input("""Sorted by:
+    1)"""))
+    data = sorted(data, key=lambda x: x[1])
 
     max_lengths = []
     for index in range(len(column_names)):
-        column = data_as_np_array[:, index]
+        # column = data_as_np_array[:, index]
+        column = [str(x[index]) for x in data]
+
         max_length_of_data = max(len(x) for x in column)
         length_of_column_name = len(column_names[index])
         max_length_of_column = max(max_length_of_data, length_of_column_name) + 2
@@ -41,8 +45,8 @@ def rendering(purchases: Query, dictionary: dict) -> None:
     print(template_for_line)
 
     # DATA
-    for x in data:
-        print(template.format(*x))
+    for row in data:
+        print(template.format(*row))
 
     # SPLITTING LINE
     print(template_for_line)

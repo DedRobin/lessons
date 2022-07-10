@@ -7,7 +7,7 @@ from lesson_13.homework.user.create_user import create_user
 from lesson_13.homework.user.read_users import read_users
 from lesson_13.homework.user.update_user import update_user
 from lesson_13.homework.user.delete_user import delete_user
-
+from lesson_13.homework.purchase.search_by_purchases import search_by_purchases
 
 def main():
     session = create_current_session()
@@ -142,7 +142,7 @@ def main():
 
                         # FILTER
                         elif selection_for_3 == 3:
-                            pass
+                            search_by_purchases(session)
 
                         # COME BACK
                         elif selection_for_3 == 4:

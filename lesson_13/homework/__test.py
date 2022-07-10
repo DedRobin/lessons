@@ -1,1 +1,4 @@
-print("{:-^20}".format(1))
+from lesson_13.homework.models import *
+
+a = eval("Profile.name == 'Pavel Rabekin'")
+pass
