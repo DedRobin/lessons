@@ -37,14 +37,14 @@ Choice condition operator -> """))
 
 def _filter_by_column(purchase: Purchase) -> dict:
     all_columns = {"User name": lambda x: x.user.profile[0].name,
-                   "User email": lambda x: x.email,
-                   "User phone": lambda x: x.profile[0].phone,
-                   "User age": lambda x: x.profile[0].age,
-                   "User city": lambda x: x.addresses[0].city,
-                   "User address": lambda x: x.addresses[0].address.replace("\n", " "),
-                   "Product name": lambda x: x.product_name,
-                   "Product price": lambda x: x.price,
-                   "Product comment": lambda x: x.price,
+                   "User email": lambda x: x.user.email,
+                   "User phone": lambda x: x.user.profile[0].phone,
+                   "User age": lambda x: x.user.profile[0].age,
+                   "User city": lambda x: x.user.addresses[0].city,
+                   "User address": lambda x: x.user.addresses[0].address.replace("\n", " "),
+                   "Product name": lambda x: x.product.product_name,
+                   "Product price": lambda x: x.product.price,
+                   "Product comment": lambda x: x.product.price,
                    "Purchase quantity": lambda x: x.purchase_quantity}
 
     filter_columns = {}
@@ -71,6 +71,7 @@ def _filter_by_column(purchase: Purchase) -> dict:
     13) Apply filter.
     
     Selection -> """))
+            print()
 
         except ValueError:
             print("Incorrect input! Enter integer from 1 to 12")
@@ -78,7 +79,7 @@ def _filter_by_column(purchase: Purchase) -> dict:
 
             # USER NAME
             if selection == 1:
-                filter_columns["User name"] = lambda x: x.profile[0].name
+                filter_columns["User name"] = lambda x: x.user.profile[0].name
 
             # USER EMAIL
             elif selection == 2:
