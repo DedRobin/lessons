@@ -1,8 +1,8 @@
 from getpass import getpass
 from sqlalchemy.orm import Session
 
-from lesson_13.homework.create_session import create_current_session
-from lesson_13.homework.models import User, Profile, Address
+from Shop.create_session import create_current_session
+from Shop.models import User, Profile, Address
 
 
 def update_user(session: Session) -> None:

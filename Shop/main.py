@@ -9,6 +9,7 @@ from Shop.user.update_user import update_user
 from Shop.user.delete_user import delete_user
 from Shop.purchase.search_by_purchases import search_by_purchases
 
+
 def main():
     session = create_current_session()
 

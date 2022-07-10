@@ -1,4 +1,4 @@
-from lesson_13.homework.models import *
+from Shop.models import *
 
 
 def _filter_by_column(purchase: Purchase) -> dict:

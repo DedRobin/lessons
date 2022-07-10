@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from lesson_13.homework.create_session import create_current_session
-from lesson_13.homework.models import Product
+from Shop.create_session import create_current_session
+from Shop.models import Product
 
 
 def delete_product(session: Session) -> None:

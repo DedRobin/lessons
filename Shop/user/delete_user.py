@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from lesson_13.homework.create_session import create_current_session
-from lesson_13.homework.models import User, Address, Profile
+from Shop.create_session import create_current_session
+from Shop.models import User, Address, Profile
 
 
 def delete_user(session: Session) -> None:

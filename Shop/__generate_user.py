@@ -1,7 +1,7 @@
 from faker import Faker
 from sqlalchemy.orm import Session
 
-from lesson_13.homework.create_session import create_current_session
+from Shop.create_session import create_current_session
 from models import User, Profile, Address, Product
 
 
