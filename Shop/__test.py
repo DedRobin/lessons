@@ -1,4 +1,3 @@
-from Shop.models import *
-
-a = eval("Profile.name == 'Pavel Rabekin'")
-pass
+import sys
+for x in sys.path:
+    print(x)
