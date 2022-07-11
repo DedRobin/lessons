@@ -1,3 +1,6 @@
+from Shop.models import *
+
+
 def _operator_choice() -> str:
     condition = int(input("""Operators:
     1) Equal               |   ==

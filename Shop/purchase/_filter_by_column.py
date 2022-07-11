@@ -15,7 +15,6 @@ def _filter_by_column(purchase: Purchase) -> dict:
                    "Product comment": lambda x: x.product.price,
                    "Purchase quantity": lambda x: x.purchase_quantity}
 
-
     current_filter = {"ID": lambda x: x.id}
 
     while True:
@@ -23,7 +22,7 @@ def _filter_by_column(purchase: Purchase) -> dict:
         print(*current_filter, sep=" | ", end="\n\n")
 
         try:
-            selection = int(input("""What column do you watch?
+            selection = int(input("""What column do you look?
     1) User name;
     2) User email;
     3) User phone;
