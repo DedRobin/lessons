@@ -1,35 +1,54 @@
 from Shop.models import *
 
 
-def _operator_choice() -> str:
-    condition = int(input("""Operators:
-    1) Equal               |   ==
-    2) More than           |   >
-    3) Less than           |   <
-    4) More than or equal  |   >=
-    5) Less than or equal  |   <=
-    6) Not equal           |   !=
+def _operator_choice(selection: int) -> str:
+    if selection not in (4, 10, 11):  # (4, 10, 11) == (age, product quantity, purchase quantity)
+        condition = int(input("""Operators:
+            1) Equal               |   ==
+            2) Not equal           |   !=
 
-Select condition operator -> """))
+        Select condition operator -> """))
+        # EQUAL - "=="
+        if condition == 1:
+            return "=="
 
-    # EQUAL - "=="
-    if condition == 1:
-        return "=="
+        # NOT EQUAL
+        elif condition == 2:
+            return "!="
+    else:
+        condition = int(input("""Operators:
+            1) Equal               |   ==
+            2) Not equal           |   !=
+            3) More than           |   >
+            4) Less than           |   <
+            5) More than or equal  |   >=
+            6) Less than or equal  |   <=
 
-    # MORE THAN - ">"
-    elif condition == 2:
-        return ">"
-    # LESS THAN - "<"
-    elif condition == 3:
-        return "<"
 
-    # MORE THAN OR EQUAL - ">="
-    elif condition == 4:
-        return ">="
+        Select condition operator -> """))
+        # EQUAL - "=="
+        if condition == 1:
+            return "=="
 
-    # LESS THAN OR EQUAL - "<="
-    elif condition == 5:
-        return "<="
+        # NOT EQUAL
+        elif condition == 2:
+            return "!="
+
+        # MORE THAN - ">"
+        elif condition == 3:
+            return ">"
+
+        # LESS THAN - "<"
+        elif condition == 4:
+            return "<"
+
+        # MORE THAN OR EQUAL - ">="
+        elif condition == 5:
+            return ">="
+
+        # LESS THAN OR EQUAL - "<="
+        elif condition == 6:
+            return "<="
 
 
 def _create_filter_list() -> list:
@@ -44,8 +63,9 @@ def _create_filter_list() -> list:
 
         direction = "left" if left else "right"
 
+        selection = 0
         if len(expression) == 1:
-            operator = _operator_choice()
+            operator = _operator_choice(selection=selection)
             expression.append(operator)
             continue
         elif len(expression) == 2:
@@ -73,7 +93,7 @@ def _create_filter_list() -> list:
     12) Apply filters.
     """))
         except ValueError:
-            print("Incorrect input! Enter integer from 1 to 10.")
+            print("Incorrect input! Enter integer from 1 to 12.")
         else:
 
             if selection == 1:
@@ -101,6 +121,6 @@ def _create_filter_list() -> list:
             elif selection == 12:
                 return expressions  # APPLY FILTERS
             else:
-                print("Incorrect input! Enter integer from 1 to 10.")
+                print("Incorrect input! Enter integer from 1 to 12.")
 
             left = False

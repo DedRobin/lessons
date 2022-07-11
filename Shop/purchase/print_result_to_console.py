@@ -33,7 +33,7 @@ def print_result_to_console(purchases: Query, dictionary: dict) -> None:
                     elif sort_kind == 2:
                         pass
                     else:
-                        print("Incorrect unput! Enter integer 1 or 2.")
+                        print("Incorrect input! Enter integer 1 or 2.")
                         continue
 
                     data = sorted(data, key=lambda x: x[index - 1], reverse=reverse)

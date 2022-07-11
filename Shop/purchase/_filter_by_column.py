@@ -18,27 +18,27 @@ def _filter_by_column(purchase: Purchase) -> dict:
     current_filter = {"ID": lambda x: x.id}
 
     while True:
-        print("Current filter:")
+        print("---|  Columns  |---\n")
         print(*current_filter, sep=" | ", end="\n\n")
 
         try:
-            selection = int(input("""What column do you look?
-    1) User name;
-    2) User email;
-    3) User phone;
-    4) User age;
-    5) User city;
-    6) User address;
-    7) Product name;
-    8) Product price;
-    9) Product quantity;;
-    10) Product comment;
-    11) Purchase quantity;
-    12) Insert all columns;
-    13) Clear filter;
-    14) Apply filter.
+            selection = int(input("""Select columns to display:
+\t1) User name;
+\t2) User email;
+\t3) User phone;
+\t4) User age;
+\t5) User city;
+\t6) User address;
+\t7) Product name;
+\t8) Product price;
+\t9) Product quantity;;
+\t10) Product comment;
+\t11) Purchase quantity;
+\t12) Insert all columns;
+\t13) Clear filter;
+\t14) Apply filter.
 
-    Selection -> """))
+\tSelection -> """))
             print()
 
         except ValueError:
