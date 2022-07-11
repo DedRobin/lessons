@@ -7,6 +7,7 @@ from Shop.user.create_user import create_user
 from Shop.user.read_users import read_users
 from Shop.user.update_user import update_user
 from Shop.user.delete_user import delete_user
+from Shop.purchase.buy_products import buy_product
 from Shop.purchase.search_by_purchases import search_by_purchases
 
 
@@ -135,7 +136,7 @@ def main():
 
                         # BUY PRODUCT
                         if selection_for_3 == 1:
-                            pass
+                            buy_product(session=session)
 
                         # SHOW
                         elif selection_for_3 == 2:

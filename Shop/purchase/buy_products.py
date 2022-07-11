@@ -1,8 +1,7 @@
-from re import match
 from sqlalchemy.orm import Session
 
 from Shop.create_session import create_current_session
-from Shop.models import Product, Purchase, User, Profile
+from Shop.models import Product, Purchase, User
 
 
 def _login(session: Session) -> User:
@@ -18,48 +17,47 @@ def _login(session: Session) -> User:
             print(f"User {email} not find.")
 
 
-
 def _choose_product(session: Session) -> Product:
     while True:
         product = input("Enter product name -> ")
         query = session.query(Product).filter_by(product_name=product).first()
         if query:
-            pass
+            product = query.product_name
+            print(f"Your selection -> {product}")
+            return query
         else:
             print(f"Product {product} not find.")
+
 
 def buy_product(session: Session) -> None:
     # Log into account
     user = _login(session=session)
 
+    # Product selection
     product = _choose_product(session=session)
 
-    pass
+    while True:
+        try:
+            purchase_quantity = int(input("How much do you want to buy?\nAnswer-> "))
+        except ValueError:
+            print("Incorrect input! Enter integer.")
+        else:
+            # Calculate difference
+            current_quantity = product.product_quantity
+            ost = current_quantity - purchase_quantity
+            product.product_quantity = ost
 
+            # Create purchase
+            purchase = Purchase(user=user, product=product, purchase_quantity=purchase_quantity)
 
-# current_user = __enter_or_create_user(session)
-# current_user_id = current_user.id
-#
-# current_product_id = __choice_product()
-#
-# # Find ost quantity of current product
-# ost_quantity_current_product = session.query(Product).filter_by(id=current_product_id).first()  # obj Product
-# ost_quantity_current_product = ost_quantity_current_product.product_quantity  # pull it quantity
-#
-# current_purchase_quantity = __choice_purchase_quantity(session, current_product_id, ost_quantity_current_product)
-#
-# current_purchase = Purchase(purchase_quantity=current_purchase_quantity,
-#                             user_id=current_user_id,
-#                             product_id=current_product_id)
-#
-# current_product = session.query(Product).filter_by(id=current_product_id).first()
-# current_product.product_quantity -= current_purchase_quantity
-#
-# session.add(current_purchase)
-# session.commit()
+            # COMMIT
+            session.add(purchase)
+            session.commit()
+
+            print(f"{user.profile[0].name} bought {purchase.purchase_quantity} {product.product_name}.")
+            return None
 
 
 if __name__ == '__main__':
     test_session = create_current_session()
-    # buy_product(test_session)
-    _login(test_session)
+    buy_product(test_session)
