@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from Shop.create_session import create_current_session
 from Shop.models import *
-from Shop.purchase.print_result_to_console import print_result_to_console
+from Shop.purchase._print_result_to_console import print_result_to_console
 from Shop.purchase._filter_by_column import _filter_by_column
 from Shop.purchase._create_filter_list import _create_filter_list
 
