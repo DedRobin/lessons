@@ -5,7 +5,7 @@ from sqlalchemy.engine import Engine
 DB_USER = "dedrobin"
 DB_PASSWORD = "dedrobin"
 DB_NAME = "shops"
-DB_ECHO = False
+DB_ECHO = True
 
 
 def create_db_engine():

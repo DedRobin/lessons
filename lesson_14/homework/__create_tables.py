@@ -4,7 +4,7 @@ from models import Base
 from utils import create_db_engine, create_db_engine_if_not_exists
 
 
-def create_session() -> Session:
+def create_current_session() -> Session:
     engine = create_db_engine()
     create_db_engine_if_not_exists(engine=engine)
 
@@ -15,4 +15,4 @@ def create_session() -> Session:
 
 
 if __name__ == '__main__':
-    create_session()
+    create_current_session()
