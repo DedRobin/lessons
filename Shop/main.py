@@ -125,7 +125,7 @@ def main():
                 while run_for_3:
                     print("""Menu -> Purchases:
     1) Buy product;
-    2) Read all customer's purchases;
+    2) Read all customer's purchases(Not ready);
     3) Filter purchases;
     4) <-- Come back.""")
                     try:
