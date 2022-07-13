@@ -3,6 +3,7 @@ import logging
 
 from __create_tables import create_current_session
 from models import User
+
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -16,7 +17,6 @@ def dict_to_str(data: dict) -> str:
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        some_user = User(email=request.form.get("email"), password=request.form.get(""))
         dictionary = request.form.to_dict()
         string = dict_to_str(dictionary)
         logger.info(string)
@@ -28,9 +28,29 @@ def index():
     return string
 
 
-@app.route("/test", methods=["GET"])
-def test():
-    return "Test URL"
+@app.route("/create_user", methods=["GET", "POST"])
+def create_user():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        name = request.form.get("name")
+        phone = request.form.get("phone")
+        age = request.form.get("age")
+        city = request.form.get("city")
+        address = request.form.get("address")
+
+        user = User(email=email, password=password)
+        profile = Profile(user=user, name=name, phone=phone, age=age)
+        address = Address(user=user, city=city, address=address)
+
+        data = (user, profile, address)
+
+        current_session.add_all(data)
+        current_session.commit()
+
+        return f"Create user: {user.email}"
+
+    return "It's GET-method!"
 
 
 if __name__ == "__main__":
