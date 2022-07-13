@@ -1,4 +1,4 @@
-from create_session import create_current_session
+from create_session_pack import create_current_session
 from faker import Faker
 from sqlalchemy.orm import Session
 from models import User, Purchase, Product
