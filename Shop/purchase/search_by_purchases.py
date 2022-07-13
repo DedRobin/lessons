@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from Shop.create_session import create_current_session
+from Shop.create_session_pack import create_current_session
 from Shop.models import *
 from Shop.purchase._print_result_to_console import print_result_to_console
 from Shop.purchase._filter_by_column import _filter_by_column

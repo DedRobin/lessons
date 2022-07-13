@@ -1,14 +1,14 @@
-from Shop.create_session import create_current_session
-from Shop.product.create_product import create_product
-from Shop.product.read_product import read_product
-from Shop.product.update_product import update_product
-from Shop.product.delete_product import delete_product
-from Shop.user.create_user import create_user
-from Shop.user.read_users import read_users
-from Shop.user.update_user import update_user
-from Shop.user.delete_user import delete_user
-from Shop.purchase.buy_products import buy_product
-from Shop.purchase.search_by_purchases import search_by_purchases
+from create_session_pack import create_current_session
+from Shop.create_session_pack.create_product import create_product
+from product.read_product import read_product
+from product.update_product import update_product
+from product.delete_product import delete_product
+from user.create_user import create_user
+from user.read_users import read_users
+from user.update_user import update_user
+from user.delete_user import delete_user
+from purchase.buy_products import buy_product
+from purchase.search_by_purchases import search_by_purchases
 
 
 def main():
