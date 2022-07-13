@@ -1,4 +1,4 @@
-from Shop.models import *
+from shop.models import *
 
 
 def _operator_choice(selection: int) -> str:

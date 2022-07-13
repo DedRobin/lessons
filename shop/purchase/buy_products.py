@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from Shop.create_session_pack import create_current_session
-from Shop.models import Product, Purchase, User
+from shop.create_session_pack import create_current_session
+from shop.models import Product, Purchase, User
 
 
 def _login(session: Session) -> User:

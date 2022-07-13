@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from Shop.create_session_pack import create_current_session
-from Shop.models import Product
+from shop.create_session_pack import create_current_session
+from shop.models import Product
 
 
 def update_product(session: Session) -> None:

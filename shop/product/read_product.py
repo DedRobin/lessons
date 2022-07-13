@@ -1,8 +1,8 @@
 from sqlalchemy import inspect
 from sqlalchemy.orm import Session
 
-from Shop.models import *
-from Shop.create_session_pack import create_current_session
+from shop.models import *
+from shop.create_session_pack import create_current_session
 
 
 def read_product(session: Session) -> None:

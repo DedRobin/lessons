@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 
 from ..create_session import create_current_session
-from Shop.models import *
-from Shop.purchase._print_result_to_console import print_result_to_console
-from Shop.purchase._filter_by_column import _filter_by_column
-from Shop.purchase._create_filter_list import _create_filter_list
+from shop.models import *
+from shop.purchase._print_result_to_console import print_result_to_console
+from shop.purchase._filter_by_column import _filter_by_column
+from shop.purchase._create_filter_list import _create_filter_list
 
 
 def search_by_purchases(session: Session):

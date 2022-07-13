@@ -1,4 +1,4 @@
-from Shop.models import *
+from shop.models import *
 
 
 def _filter_by_column(purchase: Purchase) -> dict:

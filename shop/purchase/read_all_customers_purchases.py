@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from Shop.create_session import create_current_session
-from Shop.models import *
+from shop.create_session import create_current_session
+from shop.models import *
 
 
 def read_all_customers_purchases(session: Session) -> None:
