@@ -1,8 +1,8 @@
 from re import match
 from sqlalchemy.orm import Session
 
-from Shop.create_session import create_current_session
-from Shop.models import Product
+from ..create_session import create_current_session
+from ..models import Product
 
 
 def create_product(session: Session) -> None:
