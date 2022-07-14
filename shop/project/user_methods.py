@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from getpass import getpass
-from shop.project.tools.models import User, Profile, Address
+from .tools.models import User, Profile, Address
 
 
 def create_user(session: Session) -> None:
