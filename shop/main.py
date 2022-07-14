@@ -1,14 +1,7 @@
-from create_session import create_current_session
-from product.create_product import create_product
-from product.read_product import read_product
-from product.update_product import update_product
-from product.delete_product import delete_product
-from user.create_user import create_user
-from user.read_users import read_users
-from user.update_user import update_user
-from user.delete_user import delete_user
-from purchase.buy_products import buy_product
-from purchase.search_by_purchases import search_by_purchases
+from project.purchase_methods import *
+from project.product_methods import *
+from project.tools.create_session import create_current_session
+from project.user_methods import *
 
 
 def main():
@@ -125,7 +118,7 @@ def main():
                 while run_for_3:
                     print("""Menu -> Purchases:
     1) Buy product;
-    2) Read all customer's purchases(not ready);
+    2) Read all customer's purchases;
     3) Filter purchases;
     4) <-- Come back.""")
                     try:
@@ -140,7 +133,7 @@ def main():
 
                         # SHOW
                         elif selection_for_3 == 2:
-                            pass
+                            read_all_customers_purchases(session=session)
 
                         # FILTER
                         elif selection_for_3 == 3:

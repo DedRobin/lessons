@@ -1,8 +1,63 @@
-from getpass import getpass
 from sqlalchemy.orm import Session
+from getpass import getpass
+from shop.project.tools.models import User, Profile, Address
 
-from shop.create_session_pack import create_current_session
-from shop.models import User, Profile, Address
+
+def create_user(session: Session) -> None:
+    # USER
+    email = input("Enter email -> ")
+    password = input("Enter password -> ")
+    new_user = User(email=email, password=password)
+
+    # PROFILE
+    name = input("Enter name -> ")
+    phone = input("Enter phone -> ")
+    while True:
+        try:
+            age = int(input("Enter age -> "))
+        except ValueError:
+            print("Error! Enter integer!")
+        else:
+            break
+
+    new_profile = Profile(user=new_user, name=name, phone=phone, age=age)
+
+    # ADDRESS
+    city = input("Enter city -> ")
+    address = input("Enter address -> ")
+    new_address = Address(user=new_user, city=city, address=address)
+
+    data = (new_user, new_profile, new_address)
+
+    # COMMIT
+    session.add_all(data)
+    session.commit()
+
+
+def delete_user(session: Session) -> None:
+    while True:
+        try:
+            id_number = int(input("Enter user ID which you want to remove it -> "))
+        except ValueError:
+            print(f"Incorrect input.")
+        else:
+            check_id = session.query(User).filter_by(id=id_number).all()
+            if check_id:
+                session.query(Address).filter_by(user_id=id_number).delete()
+                session.query(Profile).filter_by(user_id=id_number).delete()
+                session.query(User).filter_by(id=id_number).delete()
+                session.commit()
+                return
+            else:
+                print("ID is not find.")
+                continue
+
+
+def read_users(session: Session) -> None:
+    tables = session.query(User, Profile, Address).join(Profile, Address)
+    for user, profile, address in tables:
+        values = [user.email, profile.name, profile.phone, profile.age, address.city, address.address]
+        print(values)
 
 
 def update_user(session: Session) -> None:
@@ -26,7 +81,7 @@ def update_user(session: Session) -> None:
         run = True
         while run:
             print(f"""Menu -> Users -> Update user:
-            
+
 User - {current_user.first().email}.
 
 What column do you want to change?
@@ -129,8 +184,3 @@ What column do you want to change?
 
                 else:
                     print("Incorrect input.")
-
-
-if __name__ == '__main__':
-    test_session = create_current_session()
-    update_user(test_session)

@@ -1,7 +1,48 @@
+from re import match
 from sqlalchemy.orm import Session
 
-from shop.create_session_pack import create_current_session
-from shop.models import Product
+from .tools.models import Product
+
+
+def create_product(session: Session) -> None:
+    product_data = input("Enter data separated by commas by pattern:\n'product name, price, quantity, comment'\n")
+    check = match(r"[\d\w ]+, ?\d+(\.\d+)?, ?\d+, ?[\d\w ]+", product_data)
+    if check:
+        product_data = product_data.split(",")
+        product_data = [item.strip() for item in product_data]  # product_data = [str, str, str, str]
+
+        # second(product_data[1]) and third(product_data[2]) columns convert to float and integer
+        product_data[1:3] = [float(product_data[1]), int(product_data[2])]
+
+        columns = ("product_name", "price", "product_quantity", "comment")
+
+        data = {key: value for key, value in zip(columns, product_data)}
+        current_product = Product(**data)
+
+        session.add(current_product)
+        session.commit()
+    else:
+        print("Incorrect data.")
+
+
+def delete_product(session: Session) -> None:
+    while True:
+        try:
+            id_number = int(input("Enter id for delete product:"))
+        except ValueError:
+            print(f"Incorrect input.")
+        else:
+            session.query(Product).filter_by(id=id_number).delete()
+            session.commit()
+            return
+
+
+def read_product(session: Session) -> None:
+    products = session.query(Product)
+
+    for p in products:
+        values = [p.id, p.product_name, p.price, p.product_quantity, p.comment]
+        print(values)
 
 
 def update_product(session: Session) -> None:
@@ -71,8 +112,3 @@ What column do you want to change?
                 session.add(current_product)
                 session.commit()
                 print("Product is updated.")
-
-
-if __name__ == '__main__':
-    test_session = create_current_session()
-    update_product(test_session)

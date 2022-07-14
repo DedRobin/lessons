@@ -2,7 +2,7 @@ from faker import Faker
 from sqlalchemy.orm import Session
 
 from shop.create_session_pack import create_current_session
-from models import User, Profile, Address, Product
+from shop.project.tools.models import User, Profile, Address, Product
 
 
 def generate_user(session: Session) -> None:

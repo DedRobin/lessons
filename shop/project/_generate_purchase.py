@@ -1,8 +1,9 @@
-from create_session_pack import create_current_session
 from faker import Faker
 from sqlalchemy.orm import Session
-from models import User, Purchase, Product
 from random import choice
+
+from tools.create_session import create_current_session
+from tools.models import User, Purchase, Product
 
 
 def generate_purchase(session: Session) -> None:
