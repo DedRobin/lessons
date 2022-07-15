@@ -13,7 +13,6 @@ importlib-metadata==4.12.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.1
-maskpass==0.3.6
 numpy==1.22.4
 psycopg2-binary==2.9.3
 pynput==1.7.6
