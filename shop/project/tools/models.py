@@ -12,9 +12,9 @@ class User(Base):
     password = Column(String)
 
     # links from tables
-    profile = relationship("Profile", back_populates="user")  # link from table <-- "Profile"
-    addresses = relationship("Address", back_populates="user")  # link from table <-- "Address"
-    purchases = relationship("Purchase", back_populates="user")  # link from table <-- "Purchase"
+    profile = relationship("Profile", back_populates="user", uselist=True)  # link from table <-- "Profile"
+    addresses = relationship("Address", back_populates="user", uselist=True)  # link from table <-- "Address"
+    purchases = relationship("Purchase", back_populates="user", uselist=True)  # link from table <-- "Purchase"
 
 
 class Profile(Base):

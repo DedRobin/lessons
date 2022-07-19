@@ -1,7 +1,7 @@
 from faker import Faker
 from sqlalchemy.orm import Session
 
-from shop.create_session_pack import create_current_session
+from shop.project.tools.create_session import create_current_session
 from shop.project.tools.models import User, Profile, Address, Product
 
 
@@ -16,7 +16,7 @@ def generate_user(session: Session) -> None:
     address = Address(user=user, city=fake.city(), address=fake.address())
     product = Product(product_name=fake.word(),
                       price=fake.pyint(min_value=1, max_value=1000),
-                      product_quantity=fake.pyint(min_value=1, max_value=100),
+                      product_quantity=fake.pyint(min_value=1, max_value=1000),
                       comment=f"comment {fake.word()}")
     session.add_all((user, profile, address, product))
     session.commit()
